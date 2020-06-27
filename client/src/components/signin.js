@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import { Link } from "react-router-dom";
 
 import * as actions from "./../actions/index";
 import CustomInput from "./CustomInput";
@@ -59,7 +60,9 @@ class Signin extends Component {
                 label="Enter your password"
                 placeholder="password"
               />
-              <button type="submit">Sign In</button>
+              <button className="btn btn-primary" type="submit">
+                Sign In
+              </button>
               {this.props.errorMessage ? (
                 <div className="alert alert-danger">
                   {this.props.errorMessage}
@@ -67,6 +70,7 @@ class Signin extends Component {
               ) : null}
             </fieldset>
           </form>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
         <div className="col">
           <div className="alert alert-primary">Signin using 3rd party</div>

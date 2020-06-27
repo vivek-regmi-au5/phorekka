@@ -8,8 +8,13 @@ const Profile = require("./../Models/profile");
 // @desc   Get profiles
 // @access Public
 router.get("/", async (req, res) => {
-  const profiles = await Profile.find().populate("user", "-password");
-  res.status(200).json(profiles);
+  try {
+    const profiles = await Profile.find().populate("user", "-password");
+    res.status(200).json(profiles);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Server Error" });
+  }
 });
 
 // @route  Get api/profile/id
@@ -20,10 +25,9 @@ router.get(
   passport.authenticate("jwt", { session: false }),
 
   async (req, res) => {
-    const profile = await Profile.findOne({ user: req.user._id }).populate(
-      "user",
-      "-password"
-    );
+    const profile = await Profile.findOne({ user: req.user._id })
+      .populate("user", "-password")
+      .populate("product");
     if (profile) {
       return res.status(200).json(profile);
     }

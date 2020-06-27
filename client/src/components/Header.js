@@ -31,16 +31,22 @@ class Header extends Component {
             </li>
           </ul>
           <ul className="nav navbar-nav ml-auto">
+            <li className="nav-item" key="people">
+              <Link className="nav-link" to="/people">
+                People
+              </Link>
+            </li>
+
+            <li className="nav-item" key="product">
+              <Link className="nav-link" to="/product">
+                Product
+              </Link>
+            </li>
             {!this.props.isAuth
               ? [
                   <li className="nav-item" key="signup">
                     <Link className="nav-link" to="/signup">
-                      Signup
-                    </Link>
-                  </li>,
-                  <li className="nav-item" key="signin">
-                    <Link className="nav-link" to="/signin">
-                      Signin
+                      Register
                     </Link>
                   </li>,
                 ]
@@ -49,7 +55,7 @@ class Header extends Component {
               ? [
                   <li className="nav-item" key="signout" onClick={this.signOut}>
                     <Link className="nav-link" to="/signout">
-                      Sign Out
+                      My Profile
                     </Link>
                   </li>,
                 ]

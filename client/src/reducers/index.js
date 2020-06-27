@@ -3,9 +3,11 @@ import { reducer as formReducer } from "redux-form";
 
 import authReducer from "./auth";
 import dashboardReducer from "./dashboard";
+import profileReducer from "./profile";
 
 export default combineReducers({
   form: formReducer,
   auth: authReducer,
   dash: dashboardReducer,
+  prof: profileReducer,
 });

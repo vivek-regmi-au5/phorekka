@@ -25,6 +25,7 @@ app.use(express.json());
 // app.use(morgan("dev"));
 
 // Routes
+
 app.use("/api/v1/user", require("./Routes/user"));
 app.use("/api/v1/profile", require("./Routes/profile"));
 app.use("/api/v1/address", require("./Routes/address"));

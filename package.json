@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/vivek-regmi-au5/phorekka#readme",
   "dependencies": {
+    "@material-ui/core": "^4.10.2",
     "bcryptjs": "^2.4.3",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",

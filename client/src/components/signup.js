@@ -6,6 +6,7 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import * as actions from "./../actions/index";
 import CustomInput from "./CustomInput";
+import { Link } from "react-router-dom";
 
 class Signup extends Component {
   constructor(props) {
@@ -72,6 +73,9 @@ class Signup extends Component {
               ) : null}
             </fieldset>
           </form>
+          <p>
+            Already have an account? <Link to="/signin">Sign in </Link>
+          </p>
         </div>
         <div className="col">
           <div className="alert alert-primary">Signup using 3rd party</div>
