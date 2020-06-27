@@ -10,6 +10,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import authGaurd from "./components/hoc/authGaurd";
 import App from "./components/App";
 import Home from "./components/Home";
+import Profile from "./components/Profile";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import LandingPage from "./components/landingPage";
@@ -40,6 +41,7 @@ ReactDOM.render(
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/people" component={People} />
+          <Route exact path="/profile" component={Profile} />
         </App>
       </BrowserRouter>
     </Provider>

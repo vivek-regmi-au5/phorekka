@@ -2,12 +2,14 @@ import {
   CLEAR_PROFILES,
   GET_PROFILES,
   PROFILE_ERRORS,
+  GET_PROFILE,
 } from "./../actions/types";
 
 const initialState = {
   loading: true,
   errors: null,
   profiles: null,
+  profile: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -29,12 +31,19 @@ const profileReducer = (state = initialState, action) => {
         errors: null,
       };
 
+    case GET_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        errors: null,
+        profile: state.profiles[payload],
+      };
+
     case PROFILE_ERRORS:
       return {
         ...state,
         loading: false,
         errors: payload,
-        profiles: null,
       };
     default:
       return state;

@@ -1,12 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-const ProfileCard = ({ item }) => {
+const ProfileCard = (props) => {
   return (
-    <div
-      onClick={(e) => {
-        console.log(e.target);
-      }}
-    >
+    <div>
       <div className="card mb-3" style={{ width: "100%" }}>
         <div className="row no-gutters">
           <div className="col-md-4">
@@ -18,18 +16,36 @@ const ProfileCard = ({ item }) => {
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h5 className="card-title">{item.name}</h5>
-              <p className="card-text">{item.bio}</p>
+              <h5 className="card-title">{props.profile.name}</h5>
+              <p className="card-text">{props.profile.bio}</p>
               <p className="card-text">
-                <small className="text-muted">{item.location}</small>
+                <small className="text-muted">{props.profile.location}</small>
               </p>
             </div>
+            <button
+              onClick={() => {
+                props.dispatch({
+                  type: "GET_PROFILE",
+                  payload: props.index,
+                });
+                console.log(props);
+                props.history.push("/profile");
+              }}
+              className="btn btn-primary"
+            >
+              View Profile
+            </button>
           </div>
-          <button className="btn btn-primary">View Profile</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProfileCard;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(ProfileCard));

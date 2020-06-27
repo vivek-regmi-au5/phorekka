@@ -14,8 +14,8 @@ const People = ({ getProfiles, profiles }) => {
       <h1 className="text-primary">People</h1>
       {!profiles.profiles && <Spinner />}
       {profiles.profiles &&
-        profiles.profiles.map((item) => (
-          <ProfileCard item={item} key={item._id} />
+        profiles.profiles.map((profile, index) => (
+          <ProfileCard profile={profile} index={index} key={profile._id} />
         ))}
     </div>
   );
