@@ -28,14 +28,18 @@ const profileSchema = Schema({
   currentlyWorking: {
     type: String,
   },
-  pending: {
-    type: Schema.Types.ObjectId,
-    ref: "product",
-  },
-  ordered: {
-    type: Schema.Types.ObjectId,
-    ref: "product",
-  },
+  funded: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "product",
+    },
+  ],
+  listed: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "product",
+    },
+  ],
   message: {
     type: String,
   },

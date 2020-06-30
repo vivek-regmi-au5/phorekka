@@ -7,14 +7,16 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import authGaurd from "./components/hoc/authGaurd";
 import App from "./components/App";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import Signup from "./components/signup";
-import Signin from "./components/signin";
-import LandingPage from "./components/landingPage";
+import Home from "./components/Main/Home";
+import Profile from "./components/People/Profile";
+import Signup from "./components/Auth/signup";
+import Signin from "./components/Auth/signin";
+import LandingPage from "./components/Main/landingPage";
 import { store, persistor } from "./store";
-import People from "./components/People";
+import People from "./components/People/People";
 import theme from "./theme";
+import ProductList from "./components/Product/ProductList";
+import Product from "./components/Product/Product";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
@@ -27,6 +29,8 @@ ReactDOM.render(
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/people" component={People} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/product" component={ProductList} />
+            <Route exact path="/product/item" component={Product} />
           </App>
         </PersistGate>
       </BrowserRouter>

@@ -8,6 +8,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth";
 import dashboardReducer from "./dashboard";
 import profileReducer from "./profile";
+import productReducer from "./product";
 
 const jwtToken = localStorage.getItem("JWT_TOKEN");
 axios.defaults.headers.common["Authorization"] = jwtToken;
@@ -17,12 +18,13 @@ const rootReducer = combineReducers({
   auth: authReducer,
   dash: dashboardReducer,
   prof: profileReducer,
+  prod: productReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["form", "auth", "dash", "prof"],
+  whitelist: ["form", "auth", "dash", "prof", "prod"],
 };
 
 export default persistReducer(persistConfig, rootReducer);

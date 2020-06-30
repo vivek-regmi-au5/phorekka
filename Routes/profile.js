@@ -9,7 +9,10 @@ const Profile = require("./../Models/profile");
 // @access Public
 router.get("/", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("user", "-password");
+    const profiles = await Profile.find()
+      .populate("user", "-password")
+      .populate("listed")
+      .populate("funded");
     res.status(200).json(profiles);
   } catch (error) {
     console.log(error);
@@ -27,7 +30,8 @@ router.get(
   async (req, res) => {
     const profile = await Profile.findOne({ user: req.user._id })
       .populate("user", "-password")
-      .populate("product");
+      .populate("listed")
+      .populate("funded");
     if (profile) {
       return res.status(200).json(profile);
     }
@@ -60,6 +64,8 @@ router.post(
 
     //Build profile fields
     const profileFields = {};
+    profileFields.listed = [];
+    profileFields.funded = [];
     profileFields.user = req.user._id;
     if (name) profileFields.name = name;
     if (gravatar) profileFields.gravatar = gravatar;
@@ -69,7 +75,8 @@ router.post(
     if (message) profileFields.message = message;
     if (currentlyWorking) profileFields.currentlyWorking = currentlyWorking;
     if (interests) {
-      profileFields.interests = interests;
+      profileFields.interests = [];
+      interests.forEach((interest) => profileFields.interests.push(interest));
     }
     if (youtube) profileFields.youtube = youtube;
     if (twitter) profileFields.twitter = twitter;
@@ -82,11 +89,34 @@ router.post(
 
       // If  profile found, update profile
       if (profile) {
+        const profileFieldsUpd = {};
+        profileFieldsUpd.user = req.user._id;
+        if (name) profileFieldsUpd.name = name;
+        if (gravatar) profileFieldsUpd.gravatar = gravatar;
+        if (location) profileFieldsUpd.location = location;
+        if (bio) profileFieldsUpd.bio = bio;
+        if (age) profileFieldsUpd.age = age;
+        if (message) profileFieldsUpd.message = message;
+        if (currentlyWorking)
+          profileFieldsUpd.currentlyWorking = currentlyWorking;
+        if (interests) {
+          profileFieldsUpd.interests = [];
+          interests.forEach((interest) =>
+            profileFieldsUpd.interests.push(interest)
+          );
+        }
+        if (youtube) profileFieldsUpd.youtube = youtube;
+        if (twitter) profileFieldsUpd.twitter = twitter;
+        if (instagram) profileFieldsUpd.instagram = instagram;
+        if (facebook) profileFieldsUpd.facebook = facebook;
+        if (tiktok) profileFieldsUpd.tiktok = tiktok;
         profile = await Profile.findOneAndUpdate(
           { user: req.user.id },
-          { $set: profileFields },
+          { $set: profileFieldsUpd },
           { new: true }
-        );
+        )
+          .populate("funded")
+          .populate("listed");
         return res.status(200).json(profile);
       }
 
@@ -143,6 +173,48 @@ router.delete(
     await Profile.findOneAndDelete({ user: req.user._id });
 
     res.status(200).send("Profile Successfully deleted");
+  }
+);
+
+// @route  put api/profile/funded
+// @desc   add items for crowdfunding
+// @access Private
+router.put(
+  "/funded",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user._id },
+      {
+        $push: { funded: req.body.funded },
+      },
+      { new: true }
+    )
+      .populate("funded")
+      .populate("listed");
+
+    res.status(200).json(profile);
+  }
+);
+
+// @route  put api/profile/listed
+// @desc   add items for crowdfunding
+// @access Private
+router.put(
+  "/listed",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user._id },
+      {
+        $push: { listed: req.body.listed },
+      },
+      { new: true }
+    )
+      .populate("listed")
+      .populate("funded");
+
+    res.status(200).json(profile);
   }
 );
 

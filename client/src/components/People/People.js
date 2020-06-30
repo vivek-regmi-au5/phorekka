@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { getProfiles } from "./../actions/profile";
-import Spinner from "./Spinner";
+import { getProfiles } from "../../actions/profile";
+import Spinner from "../Main/Spinner";
 import ProfileCard from "./ProfileCard";
 
 const People = ({ getProfiles, profiles }) => {

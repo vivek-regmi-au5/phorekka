@@ -8,3 +8,7 @@ export const CLEAR_PROFILES = "CLEAR_PROFILES";
 export const GET_PROFILES = "GET_PROFILES";
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERRORS = "PROFILE_ERRORS";
+export const CLEAR_PRODUCTS = "CLEAR_PRODUCTS";
+export const GET_PRODUCTS = "GET_PRODUCTS";
+export const GET_PRODUCT = "GET_PRODUCT";
+export const PRODUCT_ERRORS = "PRODUCT_ERRORS";

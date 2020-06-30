@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import * as actions from "./../actions/index";
-import CustomInput from "./CustomInput";
 import { Link } from "react-router-dom";
 
-class Signup extends Component {
+import * as actions from "../../actions/index";
+import CustomInput from "./CustomInput";
+
+class Signin extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -16,15 +17,12 @@ class Signup extends Component {
     this.responseFacebook = this.responseFacebook.bind(this);
   }
   async onSubmit(formData) {
-    console.log("Submit() got called");
-    console.log("form data: ", formData);
-    await this.props.signUp(formData);
+    await this.props.signIn(formData);
     if (!this.props.errorMessage) {
       this.props.history.push("/dashboard");
     }
   }
   async responseGoogle(res) {
-    console.log("responseGoogle: ", res);
     await this.props.oauthGoogle(res.accessToken);
     if (!this.props.errorMessage) {
       this.props.history.push("/dashboard");
@@ -32,7 +30,6 @@ class Signup extends Component {
   }
 
   async responseFacebook(res) {
-    console.log("responseFacebook: ", res);
     await this.props.oauthFacebook(res.accessToken);
     if (!this.props.errorMessage) {
       this.props.history.push("/dashboard");
@@ -64,7 +61,7 @@ class Signup extends Component {
                 placeholder="password"
               />
               <button className="btn btn-primary" type="submit">
-                Signup
+                Sign In
               </button>
               {this.props.errorMessage ? (
                 <div className="alert alert-danger">
@@ -73,12 +70,10 @@ class Signup extends Component {
               ) : null}
             </fieldset>
           </form>
-          <p>
-            Already have an account? <Link to="/signin">Sign in </Link>
-          </p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
         <div className="col">
-          <div className="alert alert-primary">Signup using 3rd party</div>
+          <div className="alert alert-primary">Signin using 3rd party</div>
           <div className="text-center">
             <FacebookLogin
               appId="3114357415321475"
@@ -108,5 +103,5 @@ function mapStateToProps(state) {
 
 export default compose(
   connect(mapStateToProps, actions),
-  reduxForm({ form: "signup" })
-)(Signup);
+  reduxForm({ form: "signin" })
+)(Signin);
