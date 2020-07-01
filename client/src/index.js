@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { PersistGate } from "redux-persist/integration/react";
 
 import authGaurd from "./components/hoc/authGaurd";
-import App from "./components/App";
+import App from "./components/App.jsx";
 import Home from "./components/Main/Home";
 import Profile from "./components/People/Profile";
 import Signup from "./components/Auth/signup";
