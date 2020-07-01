@@ -19,20 +19,20 @@ class Signin extends Component {
   async onSubmit(formData) {
     await this.props.signIn(formData);
     if (!this.props.errorMessage) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
   async responseGoogle(res) {
     await this.props.oauthGoogle(res.accessToken);
     if (!this.props.errorMessage) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
 
   async responseFacebook(res) {
     await this.props.oauthFacebook(res.accessToken);
     if (!this.props.errorMessage) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
   render() {

@@ -20,14 +20,14 @@ class Signup extends Component {
     console.log("form data: ", formData);
     await this.props.signUp(formData);
     if (!this.props.errorMessage) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
   async responseGoogle(res) {
     console.log("responseGoogle: ", res);
     await this.props.oauthGoogle(res.accessToken);
     if (!this.props.errorMessage) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
 
@@ -35,7 +35,7 @@ class Signup extends Component {
     console.log("responseFacebook: ", res);
     await this.props.oauthFacebook(res.accessToken);
     if (!this.props.errorMessage) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
   render() {

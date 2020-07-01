@@ -23,13 +23,16 @@ class Header extends Component {
           Phorekka
         </Link>
         <div className="collapse navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/dashboard">
-                Dashboard
-              </Link>
-            </li>
-          </ul>
+          {this.props.isAuth && (
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/home">
+                  Home
+                </Link>
+              </li>
+            </ul>
+          )}
+
           <ul className="nav navbar-nav ml-auto">
             <li className="nav-item" key="people">
               <Link className="nav-link" to="/people">

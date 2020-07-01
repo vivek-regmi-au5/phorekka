@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { addProductForCrowdFund } from "./../../actions/listProduct";
 
 const ProductCard = (props) => {
   return (
@@ -35,7 +36,14 @@ const ProductCard = (props) => {
             >
               View product
             </button>
-            <button className="btn btn-success">Add Item</button>
+            <button
+              onClick={() => {
+                props.addProductForCrowdFund(props.product._id);
+              }}
+              className="btn btn-success"
+            >
+              Add Item
+            </button>
           </div>
         </div>
       </div>
