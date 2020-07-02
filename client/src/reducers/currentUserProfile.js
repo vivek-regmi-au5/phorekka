@@ -2,6 +2,8 @@ import {
   GET_PROFILE,
   CLEAR_PROFILE,
   CURRENT_PROFILE_ERRORS,
+  ADD_PRODUCT,
+  LISTING_ERRORS,
 } from "./../actions/types";
 
 const initialState = {
@@ -18,19 +20,34 @@ const currentProfileReducer = (state = initialState, action) => {
         ...state,
         profile: payload,
         loading: false,
+        errors: null,
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
-        loading: true,
+        loading: false,
+        errors: null,
       };
     case CURRENT_PROFILE_ERRORS:
       return {
         ...state,
         errors: payload,
         profile: null,
-        loading: true,
+        loading: false,
+      };
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        profile: payload,
+        loading: false,
+        errors: null,
+      };
+    case LISTING_ERRORS:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
       };
     default:
       return state;

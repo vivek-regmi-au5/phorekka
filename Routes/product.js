@@ -7,7 +7,7 @@ const Product = require("./../Models/product");
 // @route  Get api/product
 // @desc   Get all product
 // @access Admin
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   const products = await Product.find();
   res.status(200).json(products);
 });
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 // @route  Get api/product/id
 // @desc   Get a product by id
 // @access Admin
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const product = await Product.findById(req.params.id);
   res.status(200).json(product);
 });
@@ -23,7 +23,7 @@ router.get("/:id", async (req, res) => {
 // @route  Post api/product
 // @desc   Create product
 // @access Admin
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   const {
     title,
     category,
@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
 // @route  Put api/address/id
 // @desc   Update address
 // @access Private
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res, next) => {
   const {
     title,
     category,
@@ -104,7 +104,7 @@ router.put("/:id", async (req, res) => {
 // @route  Delete api/product
 // @desc   Delete product
 // @access Admin
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   await Product.findOneAndDelete({ _id: req.params.id });
   res.status(200).send("Product Successfully deleted");
 });

@@ -10,7 +10,11 @@ const Home = ({ getCurrProfile, profile }) => {
   }, []);
   return (
     <div>
-      {profile.profile ? (
+      {profile.loading && <Spinner />}
+      {!profile.errors && !profile.profile && (
+        <p>You dont have a profile yet</p>
+      )}
+      {profile.profile && (
         <div>
           <h1 className="text-primary">My Profile</h1>
           <div className="card mb-3" style={{ width: "100%" }}>
@@ -36,8 +40,6 @@ const Home = ({ getCurrProfile, profile }) => {
             </div>
           </div>
         </div>
-      ) : (
-        <Spinner />
       )}
     </div>
   );

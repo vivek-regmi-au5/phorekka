@@ -1,4 +1,4 @@
-import { LIST_PRODUCT_FOR_CROWDFUNDING, LISTING_ERRORS } from "./types";
+import { LISTING_ERRORS, ADD_PRODUCT } from "./types";
 import axios from "axios";
 
 // Add product to list
@@ -11,7 +11,7 @@ export const addProductForCrowdFund = (product_id) => {
       );
       console.log("response at addding product: ", res);
       dispatch({
-        type: LIST_PRODUCT_FOR_CROWDFUNDING,
+        type: ADD_PRODUCT,
         payload: res.data,
       });
     } catch (err) {

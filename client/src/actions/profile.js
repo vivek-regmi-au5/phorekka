@@ -48,7 +48,7 @@ export const getCurrProfile = () => {
     } catch (err) {
       dispatch({
         type: CURRENT_PROFILE_ERRORS,
-        payload: { msg: err.response.statusText, status: err.response.status },
+        payload: { err },
       });
     }
   };

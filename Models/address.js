@@ -12,19 +12,19 @@ const addressSchema = Schema({
   },
   country: {
     type: String,
-    required: true,
+    required: [true, "Country is required"],
   },
   state: {
     type: String,
-    required: true,
+    required: [true, "State is required"],
   },
   district: {
     type: String,
-    required: true,
+    required: [true, "District is required"],
   },
   pin: {
     type: String,
-    required: true,
+    required: [true, "Pin is required"],
   },
   houseNo: {
     type: String,
@@ -34,7 +34,7 @@ const addressSchema = Schema({
   },
   mobile: {
     type: String,
-    required: true,
+    required: [true, "Mobile number is required"],
   },
 });
 

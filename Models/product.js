@@ -4,42 +4,41 @@ const Schema = mongoose.Schema;
 const productSchema = Schema({
   title: {
     type: String,
-    required: true,
+    required: [true, "Title is required"],
   },
   category: {
     type: String,
-    required: true,
+    required: [true, "Category is required"],
   },
   brand: {
     type: String,
-    required: true,
+    required: [true, "Brand name is required"],
   },
   originalPrice: {
     type: String,
-    required: true,
+    required: [true, "Original price is required"],
   },
   sellingPrice: {
     type: String,
-    required: true,
+    required: [true, "Selling price is required"],
   },
   discount: {
     type: String,
-    required: true,
+    required: [true, "Discount is required"],
   },
 
   descriptionMain: {
     type: String,
-    required: true,
+    required: [true, "Main description is required"],
   },
   descriptionSub: {
     type: String,
-    required: true,
+    required: [true, "Secondary description is required"],
   },
   descriptionSmall: {
     type: String,
   },
   images: [{ type: String }],
-  
 });
 
 const Product = mongoose.model("product", productSchema);

@@ -51,4 +51,6 @@ const ProductCard = (props) => {
   );
 };
 
-export default withRouter(connect()(ProductCard));
+export default withRouter(
+  connect(null, { addProductForCrowdFund })(ProductCard)
+);

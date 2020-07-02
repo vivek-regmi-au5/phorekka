@@ -9,7 +9,7 @@ const profileSchema = Schema({
   },
   name: {
     type: String,
-    required: true,
+    required: [true, "Name is required"],
   },
   gravatar: {
     type: String,

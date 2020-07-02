@@ -10,6 +10,7 @@ import dashboardReducer from "./dashboard";
 import profileReducer from "./profile";
 import productReducer from "./product";
 import currentProfileReducer from "./currentUserProfile";
+import alertReducer from "./alert";
 
 const jwtToken = localStorage.getItem("JWT_TOKEN");
 axios.defaults.headers.common["Authorization"] = jwtToken;
@@ -21,12 +22,13 @@ const rootReducer = combineReducers({
   prof: profileReducer,
   prod: productReducer,
   currProf: currentProfileReducer,
+  alert: alertReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["form", "auth", "dash", "prof", "prod", "currProf"],
+  whitelist: ["form", "auth", "dash", "prof", "prod", "currProf", "alert"],
 };
 
 export default persistReducer(persistConfig, rootReducer);

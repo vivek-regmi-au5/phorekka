@@ -7,7 +7,7 @@ const Profile = require("./../Models/profile");
 // @route  Get api/profile
 // @desc   Get profiles
 // @access Public
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const profiles = await Profile.find()
       .populate("user", "-password")
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(profiles);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ msg: "Server Error" });
+    next(error);
   }
 });
 
@@ -27,15 +27,18 @@ router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
 
-  async (req, res) => {
-    const profile = await Profile.findOne({ user: req.user._id })
-      .populate("user", "-password")
-      .populate("listed")
-      .populate("funded");
-    if (profile) {
-      return res.status(200).json(profile);
+  async (req, res, next) => {
+    try {
+      const profile = await Profile.findOne({ user: req.user._id })
+        .populate("user", "-password")
+        .populate("listed")
+        .populate("funded");
+      if (profile) {
+        return res.status(200).json(profile);
+      }
+    } catch (error) {
+      next(error);
     }
-    res.status(404).send("Profile not found");
   }
 );
 
@@ -45,7 +48,7 @@ router.get(
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req, res, next) => {
     const {
       name,
       gravatar,
@@ -126,39 +129,7 @@ router.post(
       const nwProf = await newProfile.save();
       res.status(201).json({ profile: nwProf });
     } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-// @route  Put api/profile
-// @desc   Update profiles
-// @access Private
-router.put(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    const profile = Profile.find({ user: req.user._id });
-    if (!profile) {
-      const newProfile = new Profile({
-        user: req.user._id,
-        name: req.body.name,
-        gravatar: req.body.gravatar,
-        bio: req.body.bio,
-        location: req.body.location,
-        age: req.body.age,
-        interests: req.body.interests,
-        currentlyWorking: req.body.currentlyWorking,
-        message: req.body.message,
-        twitter: req.body.twitter,
-        instagram: req.body.instagram,
-        facebook: req.body.facebook,
-        youtube: req.body.youtube,
-        tiktok: req.body.tiktok,
-      });
-      const profile = await newProfile.save();
-      return res.status(201).json({ profile });
-    } else {
+      next(error);
     }
   }
 );
@@ -169,10 +140,13 @@ router.put(
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    await Profile.findOneAndDelete({ user: req.user._id });
-
-    res.status(200).send("Profile Successfully deleted");
+  async (req, res, next) => {
+    try {
+      await Profile.findOneAndDelete({ user: req.user._id });
+      res.status(200).send("Profile Successfully deleted");
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -182,18 +156,22 @@ router.delete(
 router.put(
   "/funded",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    let profile = await Profile.findOneAndUpdate(
-      { user: req.user._id },
-      {
-        $push: { funded: req.body.funded },
-      },
-      { new: true }
-    )
-      .populate("funded")
-      .populate("listed");
+  async (req, res, next) => {
+    try {
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user._id },
+        {
+          $push: { funded: req.body.funded },
+        },
+        { new: true }
+      )
+        .populate("funded")
+        .populate("listed");
 
-    res.status(200).json(profile);
+      res.status(200).json(profile);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -203,18 +181,22 @@ router.put(
 router.put(
   "/listed",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    let profile = await Profile.findOneAndUpdate(
-      { user: req.user._id },
-      {
-        $push: { listed: req.body.listed },
-      },
-      { new: true }
-    )
-      .populate("listed")
-      .populate("funded");
+  async (req, res, next) => {
+    try {
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user._id },
+        {
+          $push: { listed: req.body.listed },
+        },
+        { new: true }
+      )
+        .populate("listed")
+        .populate("funded");
 
-    res.status(200).json(profile);
+      res.status(200).json(profile);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 

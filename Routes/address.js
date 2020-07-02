@@ -10,11 +10,15 @@ const Address = require("./../Models/address");
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    const addresses = await Address.find({ user: req.user._id })
-      .populate("user", "-password")
-      .populate("profile", ["name"]);
-    res.status(200).json(addresses);
+  async (req, res, next) => {
+    try {
+      const addresses = await Address.find({ user: req.user._id })
+        .populate("user", "-password")
+        .populate("profile", ["name"]);
+      res.status(200).json(addresses);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -24,7 +28,7 @@ router.get(
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req, res, next) => {
     const {
       country,
       state,
@@ -57,7 +61,7 @@ router.post(
       const newAddress = await address.save();
       res.status(201).json({ address: newAddress });
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 );
@@ -68,7 +72,7 @@ router.post(
 router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req, res, next) => {
     const {
       country,
       state,
@@ -94,13 +98,18 @@ router.put(
     if (state) {
       addressFields.state = state;
     }
-    const address = await Address.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: addressFields },
-      { new: true }
-    );
 
-    res.status(201).json(address);
+    try {
+      const address = await Address.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: addressFields },
+        { new: true }
+      );
+
+      res.status(201).json(address);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -110,9 +119,13 @@ router.put(
 router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    await Address.findOneAndDelete({ _id: req.params.id });
-    res.status(200).send("Address Successfully deleted");
+  async (req, res, next) => {
+    try {
+      await Address.findOneAndDelete({ _id: req.params.id });
+      res.status(200).send("Address Successfully deleted");
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
