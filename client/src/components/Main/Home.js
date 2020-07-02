@@ -10,10 +10,8 @@ const Home = ({ getCurrProfile, profile }) => {
   }, []);
   return (
     <div>
-      {profile.loading && <Spinner />}
-      {!profile.errors && !profile.profile && (
-        <p>You dont have a profile yet</p>
-      )}
+      {!profile.profile && <Spinner />}
+
       {profile.profile && (
         <div>
           <h1 className="text-primary">My Profile</h1>
@@ -29,7 +27,7 @@ const Home = ({ getCurrProfile, profile }) => {
               <div className="col-md-8">
                 <div className="card-body">
                   <h5 className="card-title">{profile.profile.name}</h5>
-                  <p className="card-text">{profile.profile.bio}</p>
+                  <p className="card-text">{profile.profile.message}</p>
                   <p className="card-text">
                     <small className="text-muted">
                       {profile.profile.location}
@@ -38,6 +36,11 @@ const Home = ({ getCurrProfile, profile }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <p>{profile.profile.listed[0].title}</p>
+            <p>{profile.profile.listed[1].title}</p>
+            <p>{profile.profile.listed[2].title}</p>
           </div>
         </div>
       )}
