@@ -17,9 +17,9 @@ const productReducer = (state = initialState, action) => {
     case CLEAR_PRODUCTS:
       return {
         ...state,
-        loading: false,
         errors: null,
         products: null,
+        product: null,
       };
 
     case GET_PRODUCTS:

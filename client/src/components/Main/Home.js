@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getCurrProfile } from "./../../actions/profile";
+
 import Spinner from "./Spinner";
 
-const Home = ({ getCurrProfile, profile }) => {
-  useEffect(() => {
-    console.log("blablabla: ", profile);
-    getCurrProfile();
-  }, []);
+const Home = ({ profile }) => {
   return (
     <div>
-      {!profile.profile && <Spinner />}
+      {!profile && <p>Create PRofile</p>}
 
-      {profile.profile && (
+      {profile && profile.length > 0 && (
         <div>
           <h1 className="text-primary">My Profile</h1>
           <div className="card mb-3" style={{ width: "100%" }}>
@@ -26,21 +22,32 @@ const Home = ({ getCurrProfile, profile }) => {
               </div>
               <div className="col-md-8">
                 <div className="card-body">
-                  <h5 className="card-title">{profile.profile.name}</h5>
-                  <p className="card-text">{profile.profile.message}</p>
+                  <h5 className="card-title">{profile[0].name}</h5>
+                  <p className="card-text">{profile[0].message}</p>
                   <p className="card-text">
-                    <small className="text-muted">
-                      {profile.profile.location}
-                    </small>
+                    <small className="text-muted">{profile[0].location}</small>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <p>{profile.profile.listed[0].title}</p>
-            <p>{profile.profile.listed[1].title}</p>
-            <p>{profile.profile.listed[2].title}</p>
+          <div className="row">
+            {profile[0].listed.map((item) => (
+              <div className="col-4" key={item._id}>
+                <div className="card mb-3" style={{ width: "22rem" }}>
+                  <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">
+                      {item.brand}
+                    </h6>
+                    <p className="card-text">{item.descriptionMain}</p>
+                    <a href="#" className="card-link">
+                      Rs. {item.originalPrice}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -50,8 +57,8 @@ const Home = ({ getCurrProfile, profile }) => {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.currProf,
+    profile: state.prof.profile,
   };
 };
 
-export default connect(mapStateToProps, { getCurrProfile })(Home);
+export default connect(mapStateToProps)(Home);

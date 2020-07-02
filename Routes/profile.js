@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
     res.status(200).json(profiles);
   } catch (error) {
     console.log(error);
-    next(error);
+    res.json(error);
   }
 });
 
@@ -37,7 +37,7 @@ router.get(
         return res.status(200).json(profile);
       }
     } catch (error) {
-      next(error);
+      res.json(error);
     }
   }
 );
@@ -129,7 +129,7 @@ router.post(
       const nwProf = await newProfile.save();
       res.status(201).json({ profile: nwProf });
     } catch (error) {
-      next(error);
+      res.json(error);
     }
   }
 );
@@ -145,7 +145,7 @@ router.delete(
       await Profile.findOneAndDelete({ user: req.user._id });
       res.status(200).send("Profile Successfully deleted");
     } catch (error) {
-      next(error);
+      res.json(error);
     }
   }
 );
@@ -170,7 +170,7 @@ router.put(
 
       res.status(200).json(profile);
     } catch (error) {
-      next(error);
+      res.json(error);
     }
   }
 );
@@ -195,7 +195,7 @@ router.put(
 
       res.status(200).json(profile);
     } catch (error) {
-      next(error);
+      res.json(error);
     }
   }
 );

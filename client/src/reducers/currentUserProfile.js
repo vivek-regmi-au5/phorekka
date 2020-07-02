@@ -46,7 +46,7 @@ const currentProfileReducer = (state = initialState, action) => {
     case LISTING_ERRORS:
       return {
         ...state,
-        error: payload,
+        errors: payload.err.msg,
         loading: false,
       };
     default:

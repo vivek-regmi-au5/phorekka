@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { addProductForCrowdFund } from "./../../actions/listProduct";
+import {
+  addProductForCrowdFund,
+  productDetail,
+} from "./../../actions/listProduct";
 
 const ProductCard = (props) => {
   return (
@@ -25,11 +28,7 @@ const ProductCard = (props) => {
             </div>
             <button
               onClick={() => {
-                props.dispatch({
-                  type: "GET_PRODUCT",
-                  payload: props.index,
-                });
-                console.log(props);
+                productDetail();
                 props.history.push("/product/item");
               }}
               className="btn btn-primary"
@@ -52,5 +51,5 @@ const ProductCard = (props) => {
 };
 
 export default withRouter(
-  connect(null, { addProductForCrowdFund })(ProductCard)
+  connect(null, { addProductForCrowdFund, productDetail })(ProductCard)
 );

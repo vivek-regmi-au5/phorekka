@@ -5,6 +5,10 @@ import {
   SIGN_OUT,
   AUTH_SIGN_IN,
   DASHBOARD_DATA,
+  GET_PROFILE,
+  CLEAR_PROFILE,
+  CLEAR_PROFILES,
+  CLEAR_PRODUCTS,
 } from "./types";
 
 export const signUp = (data) => {
@@ -41,10 +45,25 @@ export const oauthGoogle = (data) => {
         { access_token: data }
       );
       console.log("ress: ", res);
-      dispatch({
-        type: AUTH_SIGN_UP,
-        payload: res.data.token,
-      });
+      if (!res.data.profile) {
+        dispatch({
+          type: AUTH_SIGN_UP,
+          payload: res.data.token,
+        });
+      } else {
+        dispatch({
+          type: AUTH_SIGN_UP,
+          payload: res.data.token,
+        });
+        dispatch({
+          type: CLEAR_PROFILE,
+        });
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data.profile,
+        });
+      }
+
       localStorage.setItem("JWT_TOKEN", res.data.token);
       axios.defaults.headers.common["Authorization"] = res.data.token;
     } catch (error) {
@@ -61,11 +80,26 @@ export const oauthFacebook = (data) => {
         "http://localhost:9122/api/v1/user/facebook/oauth",
         { access_token: data }
       );
+      console.log("Response after facebook signup/signin: ", res);
       console.log("ress: ", res);
-      dispatch({
-        type: AUTH_SIGN_UP,
-        payload: res.data.token,
-      });
+      if (!res.data.profile) {
+        dispatch({
+          type: AUTH_SIGN_UP,
+          payload: res.data.token,
+        });
+      } else {
+        dispatch({
+          type: AUTH_SIGN_UP,
+          payload: res.data.token,
+        });
+        dispatch({
+          type: CLEAR_PROFILE,
+        });
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data.profile,
+        });
+      }
       localStorage.setItem("JWT_TOKEN", res.data.token);
       axios.defaults.headers.common["Authorization"] = res.data.token;
     } catch (error) {
@@ -81,6 +115,15 @@ export const signOut = (dispatch) => {
     dispatch({
       type: SIGN_OUT,
     });
+    dispatch({
+      type: CLEAR_PROFILE,
+    });
+    dispatch({
+      type: CLEAR_PROFILES,
+    });
+    dispatch({
+      type: CLEAR_PRODUCTS,
+    });
   };
 };
 
@@ -92,10 +135,24 @@ export const signIn = (data) => {
         data
       );
       console.log("res: ", res);
-      dispatch({
-        type: AUTH_SIGN_IN,
-        payload: res.data.token,
-      });
+      if (!res.data.profile) {
+        dispatch({
+          type: AUTH_SIGN_UP,
+          payload: res.data.token,
+        });
+      } else {
+        dispatch({
+          type: AUTH_SIGN_UP,
+          payload: res.data.token,
+        });
+        dispatch({
+          type: CLEAR_PROFILE,
+        });
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data.profile,
+        });
+      }
 
       localStorage.setItem("JWT_TOKEN", res.data.token);
       axios.defaults.headers.common["Authorization"] = res.data.token;

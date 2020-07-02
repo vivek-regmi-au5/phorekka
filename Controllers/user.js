@@ -1,4 +1,5 @@
 require("dotenv").config();
+const Profile = require("./../Models/profile");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/user");
 
@@ -43,7 +44,14 @@ const signup = async (req, res, next) => {
 
 const signin = async (req, res, next) => {
   const token = signToken(req.user);
-  res.status(200).json({ token });
+  const profile = await Profile.find({ user: req.user._id })
+    .populate("listed")
+    .populate("funded");
+  if (profile.length > 0) {
+    return res.status(200).json({ token, profile });
+  } else {
+    return res.status(200).json(token);
+  }
 };
 
 const secret = async (req, res, next) => {
@@ -52,12 +60,26 @@ const secret = async (req, res, next) => {
 
 const googleOauth = async (req, res, next) => {
   const token = signToken(req.user);
-  res.status(200).json({ token });
+  const profile = await Profile.find({ user: req.user._id })
+    .populate("listed")
+    .populate("funded");
+  if (profile.length > 0) {
+    return res.status(200).json({ token, profile });
+  } else {
+    return res.status(200).json(token);
+  }
 };
 
 const facebookOauth = async (req, res, next) => {
   const token = signToken(req.user);
-  res.status(200).json({ token });
+  const profile = await Profile.find({ user: req.user._id })
+    .populate("listed")
+    .populate("funded");
+  if (profile.length > 0) {
+    return res.status(200).json({ token, profile });
+  } else {
+    return res.status(200).json(token);
+  }
 };
 
 module.exports = {
