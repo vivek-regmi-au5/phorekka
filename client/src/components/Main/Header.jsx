@@ -98,7 +98,7 @@ const Header = (props) => {
   return (
     <div className={classes.root}>
       <ThemeProvider theme={appBarTheme}>
-        <AppBar elevation={0} position='static'>
+        <AppBar elevation={0} position='fixed'>
           <Toolbar >
             <IconButton 
             edge='start' 
