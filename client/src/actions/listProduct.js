@@ -34,7 +34,7 @@ export const productDetail = (index) => {
     } catch (err) {
       dispatch({
         type: LISTING_ERRORS,
-        payload: { msg: err, status: err.response.status },
+        payload: err,
       });
     }
   };

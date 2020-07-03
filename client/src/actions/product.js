@@ -3,7 +3,8 @@ import {
   CLEAR_PRODUCTS,
   PRODUCT_ERRORS,
   CLEAR_PROFILES,
-  GET,
+  FILTER_PRODUCTS,
+  CATEGORY_FILTER_PRODUCTS,
 } from "./types";
 import axios from "axios";
 
@@ -24,6 +25,23 @@ export const getProducts = () => {
       dispatch({
         type: PRODUCT_ERRORS,
         payload: { msg: err, status: err.response.status },
+      });
+    }
+  };
+};
+
+// Filter products based on genderFilter
+export const filterProducts = (genderFilter, categoryFilter) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: FILTER_PRODUCTS,
+        payload: { genderFilter: genderFilter, categoryFilter: categoryFilter },
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERRORS,
+        payload: err,
       });
     }
   };

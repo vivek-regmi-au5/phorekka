@@ -28,7 +28,7 @@ const ProductCard = (props) => {
             </div>
             <button
               onClick={() => {
-                productDetail();
+                props.productDetail(props.index);
                 props.history.push("/product/item");
               }}
               className="btn btn-primary"
