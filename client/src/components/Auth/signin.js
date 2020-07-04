@@ -37,9 +37,14 @@ class Signin extends Component {
   }
   render() {
     const { handleSubmit } = this.props;
+    const { alert } = this.props;
+    console.log("Props at handle submit: ", this.props);
     return (
       <div className="row">
         <div className="col">
+          {alert.msg && (
+            <div className={`alert alert-${alert.alertType}`}>{alert.msg}</div>
+          )}
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <fieldset>
               <Field
@@ -98,6 +103,7 @@ class Signin extends Component {
 function mapStateToProps(state) {
   return {
     errorMessage: state.auth.errorMessage,
+    alert: state.alert,
   };
 }
 

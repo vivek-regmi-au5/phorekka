@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
+import { setAlert } from "../../actions/alert";
 
 class Header extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Header extends Component {
   signOut() {
     console.log("signout got called");
     this.props.signOut();
+    this.props.setAlert("You have signed out successfully", "success");
   }
   render() {
     console.log("props at header: ", this.props);
@@ -57,7 +59,7 @@ class Header extends Component {
             {this.props.isAuth
               ? [
                   <li className="nav-item" key="signout" onClick={this.signOut}>
-                    <Link className="nav-link" to="/signout">
+                    <Link className="nav-link" to="/signin">
                       Signout
                     </Link>
                   </li>,
