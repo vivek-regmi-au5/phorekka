@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { SHOW_DISPLAY_PROFILE } from "./../../actions/types";
 
 const ProfileCard = (props) => {
   return (
@@ -25,7 +26,7 @@ const ProfileCard = (props) => {
             <button
               onClick={() => {
                 props.dispatch({
-                  type: "GET_PROFILE",
+                  type: SHOW_DISPLAY_PROFILE,
                   payload: props.index,
                 });
                 console.log(props);

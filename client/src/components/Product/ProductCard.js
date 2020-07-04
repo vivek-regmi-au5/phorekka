@@ -6,7 +6,13 @@ import {
   productDetail,
 } from "./../../actions/listProduct";
 
-const ProductCard = (props) => {
+const ProductCard = ({
+  product,
+  productDetail,
+  addProductForCrowdFund,
+  history,
+  index,
+}) => {
   return (
     <div>
       <div className="card mb-3" style={{ width: "100%" }}>
@@ -20,16 +26,16 @@ const ProductCard = (props) => {
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h5 className="card-title">{props.product.title}</h5>
-              <p className="card-text">{props.product.category}</p>
+              <h5 className="card-title">{product.title}</h5>
+              <p className="card-text">{product.category}</p>
               <p className="card-text">
-                <small className="text-muted">{props.product.brand}</small>
+                <small className="text-muted">{product.brand}</small>
               </p>
             </div>
             <button
               onClick={() => {
-                productDetail();
-                props.history.push("/product/item");
+                productDetail(index);
+                history.push("/product/item");
               }}
               className="btn btn-primary"
             >
@@ -37,7 +43,7 @@ const ProductCard = (props) => {
             </button>
             <button
               onClick={() => {
-                props.addProductForCrowdFund(props.product._id);
+                addProductForCrowdFund(product._id);
               }}
               className="btn btn-success"
             >

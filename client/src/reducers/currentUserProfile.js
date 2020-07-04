@@ -4,6 +4,7 @@ import {
   CURRENT_PROFILE_ERRORS,
   ADD_PRODUCT,
   LISTING_ERRORS,
+  SHOW_DISPLAY_PROFILE,
 } from "./../actions/types";
 
 const initialState = {
@@ -22,6 +23,7 @@ const currentProfileReducer = (state = initialState, action) => {
         loading: false,
         errors: null,
       };
+
     case CLEAR_PROFILE:
       return {
         ...state,

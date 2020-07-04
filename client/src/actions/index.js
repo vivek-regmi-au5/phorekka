@@ -9,6 +9,7 @@ import {
   CLEAR_PROFILE,
   CLEAR_PROFILES,
   CLEAR_PRODUCTS,
+  GET_USER_PROFILE,
 } from "./types";
 
 export const signUp = (data) => {
@@ -52,14 +53,14 @@ export const oauthGoogle = (data) => {
         });
       } else {
         dispatch({
-          type: AUTH_SIGN_UP,
+          type: AUTH_SIGN_IN,
           payload: res.data.token,
         });
         dispatch({
           type: CLEAR_PROFILE,
         });
         dispatch({
-          type: GET_PROFILE,
+          type: GET_USER_PROFILE,
           payload: res.data.profile,
         });
       }
@@ -89,14 +90,14 @@ export const oauthFacebook = (data) => {
         });
       } else {
         dispatch({
-          type: AUTH_SIGN_UP,
+          type: AUTH_SIGN_IN,
           payload: res.data.token,
         });
         dispatch({
           type: CLEAR_PROFILE,
         });
         dispatch({
-          type: GET_PROFILE,
+          type: GET_USER_PROFILE,
           payload: res.data.profile,
         });
       }
@@ -137,19 +138,19 @@ export const signIn = (data) => {
       console.log("res: ", res);
       if (!res.data.profile) {
         dispatch({
-          type: AUTH_SIGN_UP,
+          type: AUTH_SIGN_IN,
           payload: res.data.token,
         });
       } else {
         dispatch({
-          type: AUTH_SIGN_UP,
+          type: AUTH_SIGN_IN,
           payload: res.data.token,
         });
         dispatch({
           type: CLEAR_PROFILE,
         });
         dispatch({
-          type: GET_PROFILE,
+          type: GET_USER_PROFILE,
           payload: res.data.profile,
         });
       }

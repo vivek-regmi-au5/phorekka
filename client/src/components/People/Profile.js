@@ -14,7 +14,7 @@ const Profile = ({ profile }) => {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.prof.profile,
+    profile: state.prof.displayProfile,
   };
 };
 

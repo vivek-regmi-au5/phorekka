@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import Spinner from "./Spinner";
@@ -8,7 +8,7 @@ const Home = ({ profile }) => {
     <div>
       {!profile && <p>Create PRofile</p>}
 
-      {profile && profile.length > 0 && (
+      {profile && (
         <div>
           <h1 className="text-primary">My Profile</h1>
           <div className="card mb-3" style={{ width: "100%" }}>
@@ -22,17 +22,17 @@ const Home = ({ profile }) => {
               </div>
               <div className="col-md-8">
                 <div className="card-body">
-                  <h5 className="card-title">{profile[0].name}</h5>
-                  <p className="card-text">{profile[0].message}</p>
+                  <h5 className="card-title">{profile.name}</h5>
+                  <p className="card-text">{profile.message}</p>
                   <p className="card-text">
-                    <small className="text-muted">{profile[0].location}</small>
+                    <small className="text-muted">{profile.location}</small>
                   </p>
                 </div>
               </div>
             </div>
           </div>
           <div className="row">
-            {profile[0].listed.map((item) => (
+            {profile.listed.map((item) => (
               <div className="col-4" key={item._id}>
                 <div className="card mb-3" style={{ width: "22rem" }}>
                   <div className="card-body">
