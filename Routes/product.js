@@ -35,12 +35,14 @@ router.post("/", async (req, res, next) => {
     descriptionSub,
     descriptionSmall,
     images,
+    whom,
   } = req.body;
 
   //Build product fields
   const productFields = {};
 
   if (title) productFields.title = title;
+  if (whom) productFields.whom = whom;
   if (category) productFields.category = category;
   if (brand) productFields.brand = brand;
   if (originalPrice) productFields.originalPrice = originalPrice;
@@ -76,12 +78,14 @@ router.put("/:id", async (req, res, next) => {
     descriptionSub,
     descriptionSmall,
     images,
+    whom,
   } = req.body;
 
   //Build product fields
   const productFields = {};
 
   if (title) productFields.title = title;
+  if (whom) productFields.whom = whom;
   if (category) productFields.category = category;
   if (brand) productFields.brand = brand;
   if (originalPrice) productFields.originalPrice = originalPrice;

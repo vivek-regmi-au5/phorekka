@@ -6,11 +6,11 @@ const Product = ({ product, addProductForCrowdFund }) => {
   return (
     <div className="card">
       <div className="card-body">
-        <h5 className="card-title">{product.title}</h5>
-        <p className="card-text">{product.brand}</p>
+        <h5 className="card-title">{product[0].title}</h5>
+        <p className="card-text">{product[0].brand}</p>
         <button
           onClick={() => {
-            addProductForCrowdFund(product._id);
+            addProductForCrowdFund(product[0]._id);
           }}
           className="btn btn-success"
         >

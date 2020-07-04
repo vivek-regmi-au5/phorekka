@@ -6,8 +6,13 @@ const productSchema = Schema({
     type: String,
     required: [true, "Title is required"],
   },
+  whom: {
+    type: String,
+    enum: ["men", "women", "all"],
+  },
   category: {
     type: String,
+    enum: ["clothing", "footware", "beauty", "electronics", "accessories"],
     required: [true, "Category is required"],
   },
   brand: {
