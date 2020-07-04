@@ -24,17 +24,17 @@ export const addProductForCrowdFund = (product_id) => {
 };
 
 // Add product to list
-export const productDetail = (index) => {
+export const productDetail = (id) => {
   return async (dispatch) => {
     try {
       dispatch({
         type: "GET_PRODUCT",
-        payload: index,
+        payload: id,
       });
     } catch (err) {
       dispatch({
         type: LISTING_ERRORS,
-        payload: { msg: err, status: err.response.status },
+        payload: err,
       });
     }
   };

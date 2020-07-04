@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   AUTH_SIGN_UP,
   AUTH_SIGN_UP_ERROR,
@@ -11,6 +12,7 @@ import {
   CLEAR_PRODUCTS,
   GET_USER_PROFILE,
 } from "./types";
+import { Redirect } from "react-router-dom";
 
 export const signUp = (data) => {
   return async (dispatch) => {
@@ -109,7 +111,7 @@ export const oauthFacebook = (data) => {
   };
 };
 
-export const signOut = (dispatch) => {
+export const signOut = () => {
   return async (dispatch) => {
     localStorage.removeItem("JWT_TOKEN");
     axios.defaults.headers.common["Authorization"] = "";

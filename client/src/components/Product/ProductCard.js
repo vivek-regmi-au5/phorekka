@@ -11,7 +11,6 @@ const ProductCard = ({
   productDetail,
   addProductForCrowdFund,
   history,
-  index,
 }) => {
   return (
     <div>
@@ -34,7 +33,7 @@ const ProductCard = ({
             </div>
             <button
               onClick={() => {
-                productDetail(index);
+                productDetail(product._id);
                 history.push("/product/item");
               }}
               className="btn btn-primary"
