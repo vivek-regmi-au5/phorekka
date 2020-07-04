@@ -38,17 +38,11 @@ const currentProfileReducer = (state = initialState, action) => {
         profile: null,
         loading: false,
       };
-    case ADD_PRODUCT:
-      return {
-        ...state,
-        profile: payload,
-        loading: false,
-        errors: null,
-      };
+
     case LISTING_ERRORS:
       return {
         ...state,
-        errors: payload.err.msg,
+        errors: payload,
         loading: false,
       };
     default:

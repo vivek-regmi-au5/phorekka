@@ -20,7 +20,7 @@ const signup = async (req, res, next) => {
   const { email, password } = req.value.body;
 
   // Check whether same email is already registered locally
-  const found = await User.findOne({ email: email });
+  const found = await User.find({ email: email });
   if (found) {
     console.log("foundLocal: ", found);
     return res.status(403).send("Email Already exists locally");

@@ -65,7 +65,7 @@ const profileReducer = (state = initialState, action) => {
     case GET_USER_PROFILE:
       return {
         ...state,
-        profile: payload,
+        profile: payload[0],
       };
     default:
       return state;

@@ -5,12 +5,14 @@ import {
   addProductForCrowdFund,
   productDetail,
 } from "./../../actions/listProduct";
+import { setAlert } from "./../../actions/alert";
 
 const ProductCard = ({
   product,
   productDetail,
   addProductForCrowdFund,
   history,
+  setAlert,
 }) => {
   return (
     <div>
@@ -41,8 +43,9 @@ const ProductCard = ({
               View product
             </button>
             <button
-              onClick={() => {
+              onClick={async () => {
                 addProductForCrowdFund(product._id);
+                setAlert("Product has been added suucessfully", "success");
               }}
               className="btn btn-success"
             >
@@ -56,5 +59,7 @@ const ProductCard = ({
 };
 
 export default withRouter(
-  connect(null, { addProductForCrowdFund, productDetail })(ProductCard)
+  connect(null, { addProductForCrowdFund, productDetail, setAlert })(
+    ProductCard
+  )
 );

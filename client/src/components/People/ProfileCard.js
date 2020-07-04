@@ -6,6 +6,9 @@ import { SHOW_DISPLAY_PROFILE } from "./../../actions/types";
 const ProfileCard = (props) => {
   return (
     <div>
+      {props.alert && (
+        <div className="alert alert-success">{props.alert.msg}</div>
+      )}
       <div className="card mb-3" style={{ width: "100%" }}>
         <div className="row no-gutters">
           <div className="col-md-4">
@@ -29,6 +32,7 @@ const ProfileCard = (props) => {
                   type: SHOW_DISPLAY_PROFILE,
                   payload: props.index,
                 });
+
                 console.log(props);
                 props.history.push("/profile");
               }}

@@ -5,7 +5,7 @@ import { getProducts, filterProducts } from "./../../actions/product";
 import Spinner from "./../Main/Spinner";
 import ProductCard from "./ProductCard";
 
-const ProductList = ({ getProducts, products, filterProducts }) => {
+const ProductList = ({ getProducts, products, filterProducts, alert }) => {
   const [genderFilter, setGenderFilter] = useState(null);
   const [categoryFilter, setCatogoryFilter] = useState(null);
 
@@ -26,6 +26,9 @@ const ProductList = ({ getProducts, products, filterProducts }) => {
 
   return (
     <div>
+      {alert.msg && (
+        <div className={`alert alert-${alert.alertType}`}>{alert.msg}</div>
+      )}
       {products.products && (
         <div>
           <label class="radio-inline">
@@ -143,6 +146,7 @@ const ProductList = ({ getProducts, products, filterProducts }) => {
 const mapStateToProps = (state) => {
   return {
     products: state.prod,
+    alert: state.alert,
   };
 };
 
