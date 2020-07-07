@@ -46,7 +46,7 @@ passport.use(
       try {
         console.log("access token: ", accessToken);
         console.log("refresh token: ", refreshToken);
-        console.log("profile token: ", profile);
+        console.log("profile: ", profile);
 
         const existingUser = await User.findOne({
           email: profile.emails[0].value,
@@ -73,6 +73,20 @@ passport.use(
     }
   )
 );
+
+// passport.use(
+//   "googleToken",
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.GOOGLE_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//     },
+//     (accessToken, refreshToken, profile, done) => {
+//       console.log(profile);
+//       return done(null, profile);
+//     }
+//   )
+// );
 
 // Facebook token strategy
 passport.use(

@@ -17,7 +17,10 @@ router.post(
 );
 router.post(
   "/google/oauth",
-  passport.authenticate("googleToken", { session: false }),
+  passport.authenticate("googleToken", {
+    session: false,
+    scope: ["profile", "email", "displayName"],
+  }),
   require("../Controllers/user").googleOauth
 );
 

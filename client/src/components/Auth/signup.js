@@ -89,7 +89,7 @@ class Signup extends Component {
             <GoogleLogin
               clientId="959283301750-cvgdn8sdcf1afcsfdolavtqavf89ubjk.apps.googleusercontent.com"
               buttonText="Google"
-              fields="name, email, picture"
+              scope="profile, email, dispalyName"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}
             />
