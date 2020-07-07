@@ -15,8 +15,8 @@ router.get(
       const crowdFundItems = await CrowdFund.find({
         "profile.user._id": req.user._id,
       })
-        .populate("profile")
-        .populate("product");
+        .populate("influencerProfileId")
+        .populate("productId");
       res.status(200).json(crowdFundItems);
     } catch (error) {
       res.send(error);
@@ -38,8 +38,8 @@ router.post(
       crowdFundfields.productId = productId;
       // Save an address
       const crowdFundItem = new CrowdFund(crowdFundfields);
-      const newitem = await CrowdFund.save();
-      res.status(201).send("New item added successfully");
+      const newitem = await crowdFundItem.save();
+      res.status(201).send("new item added successfully");
     } catch (error) {
       res.status(500).json(error);
     }

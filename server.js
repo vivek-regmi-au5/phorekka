@@ -29,6 +29,8 @@ app.use("/api/v1/user", require("./Routes/user"));
 app.use("/api/v1/profile", require("./Routes/profile"));
 app.use("/api/v1/address", require("./Routes/address"));
 app.use("/api/v1/product", require("./Routes/product"));
+app.use("/api/v1/crowdFund", require("./Routes/crowdFund"));
+app.use("/api/v1/transaction", require("./Routes/transaction"));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
