@@ -16,6 +16,12 @@ const userSchema = Schema({
   facebookId: {
     type: String,
   },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
 });
 
 userSchema.pre("save", async function (next) {

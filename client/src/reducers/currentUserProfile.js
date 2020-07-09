@@ -5,7 +5,7 @@ import {
   ADD_PRODUCT,
   LISTING_ERRORS,
   SHOW_DISPLAY_PROFILE,
-} from "./../actions/types";
+} from "../actions/types";
 
 const initialState = {
   profile: null,

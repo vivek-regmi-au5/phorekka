@@ -13,9 +13,9 @@ router.get(
   async (req, res, next) => {
     try {
       const crowdFundItems = await CrowdFund.find({
-        "profile.user._id": req.user._id,
+        profileId: req.body.profileId,
       })
-        .populate("influencerProfileId")
+        .populate("profileId")
         .populate("productId");
       res.status(200).json(crowdFundItems);
     } catch (error) {
@@ -32,14 +32,14 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
-      const { influencerProfileId, productId } = req.body;
+      const { profileId, productId } = req.body;
       const crowdFundfields = {};
-      crowdFundfields.influencerProfileId = influencerProfileId;
+      crowdFundfields.profileId = profileId;
       crowdFundfields.productId = productId;
       // Save an address
       const crowdFundItem = new CrowdFund(crowdFundfields);
       const newitem = await crowdFundItem.save();
-      res.status(201).send("new item added successfully");
+      res.status(201).json({ crowdFund: newitem });
     } catch (error) {
       res.status(500).json(error);
     }

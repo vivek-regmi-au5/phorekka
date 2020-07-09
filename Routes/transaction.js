@@ -30,14 +30,14 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
-    const { donated } = req.body;
+    const { donated, crowdFundId } = req.body;
     const transactionField = {};
-    transactionField.user = user;
+    transactionField.user = req.user._id;
     transactionField.crowdFundId = crowdFundId;
     transactionField.donated = donated;
     try {
       // Save an address
-      const transaction = new Address(transactionField);
+      const transaction = new Transaction(transactionField);
       const newTransaction = await transaction.save();
       res.status(201).json({ transaction: newTransaction });
     } catch (error) {

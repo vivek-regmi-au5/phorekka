@@ -25,7 +25,7 @@ class Signup extends Component {
   }
   async responseGoogle(res) {
     console.log("responseGoogle: ", res);
-    await this.props.oauthGoogle(res.accessToken);
+    await this.props.oauthGoogle(res);
     if (!this.props.errorMessage) {
       this.props.history.push("/");
     }
@@ -33,7 +33,7 @@ class Signup extends Component {
 
   async responseFacebook(res) {
     console.log("responseFacebook: ", res);
-    await this.props.oauthFacebook(res.accessToken);
+    await this.props.oauthFacebook(res);
     if (!this.props.errorMessage) {
       this.props.history.push("/");
     }
@@ -89,7 +89,7 @@ class Signup extends Component {
             <GoogleLogin
               clientId="959283301750-cvgdn8sdcf1afcsfdolavtqavf89ubjk.apps.googleusercontent.com"
               buttonText="Google"
-              scope="profile, email, dispalyName"
+              fields="profile, email, dispalyName"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}
             />

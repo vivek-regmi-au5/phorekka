@@ -23,14 +23,16 @@ class Signin extends Component {
     }
   }
   async responseGoogle(res) {
-    await this.props.oauthGoogle(res.accessToken);
+    console.log("responseGoogle: ", res);
+
+    await this.props.oauthGoogle(res);
     if (!this.props.errorMessage) {
       this.props.history.push("/");
     }
   }
 
   async responseFacebook(res) {
-    await this.props.oauthFacebook(res.accessToken);
+    await this.props.oauthFacebook(res);
     if (!this.props.errorMessage) {
       this.props.history.push("/");
     }

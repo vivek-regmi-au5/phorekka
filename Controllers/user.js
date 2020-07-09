@@ -20,7 +20,7 @@ const signup = async (req, res, next) => {
   const { email, password } = req.value.body;
 
   // Check whether same email is already registered locally
-  const found = await User.find({ email: email });
+  const found = await User.findOne({ email: email });
   if (found) {
     console.log("foundLocal: ", found);
     return res.status(403).send("Email Already exists locally");
@@ -44,14 +44,8 @@ const signup = async (req, res, next) => {
 
 const signin = async (req, res, next) => {
   const token = signToken(req.user);
-  const profile = await Profile.find({ user: req.user._id })
-    .populate("listed")
-    .populate("funded");
-  if (profile.length > 0) {
-    return res.status(200).json({ token, profile });
-  } else {
-    return res.status(200).json(token);
-  }
+
+  return res.status(200).json(token);
 };
 
 const secret = async (req, res, next) => {
@@ -60,26 +54,14 @@ const secret = async (req, res, next) => {
 
 const googleOauth = async (req, res, next) => {
   const token = signToken(req.user);
-  const profile = await Profile.find({ user: req.user._id })
-    .populate("listed")
-    .populate("funded");
-  if (profile.length > 0) {
-    return res.status(200).json({ token, profile });
-  } else {
-    return res.status(200).json(token);
-  }
+
+  return res.status(200).json(token);
 };
 
 const facebookOauth = async (req, res, next) => {
   const token = signToken(req.user);
-  const profile = await Profile.find({ user: req.user._id })
-    .populate("listed")
-    .populate("funded");
-  if (profile.length > 0) {
-    return res.status(200).json({ token, profile });
-  } else {
-    return res.status(200).json(token);
-  }
+
+  return res.status(200).json(token);
 };
 
 module.exports = {

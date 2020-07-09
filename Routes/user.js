@@ -30,11 +30,4 @@ router.post(
   require("../Controllers/user").facebookOauth
 );
 
-router
-  .route("/secret")
-  .get(
-    passport.authenticate("jwt", { session: false }),
-    require("../Controllers/user").secret
-  );
-
 module.exports = router;

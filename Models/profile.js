@@ -28,18 +28,6 @@ const profileSchema = Schema({
   currentlyWorking: {
     type: String,
   },
-  funded: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "product",
-    },
-  ],
-  listed: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "product",
-    },
-  ],
   message: {
     type: String,
   },

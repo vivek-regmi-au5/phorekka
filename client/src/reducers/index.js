@@ -6,7 +6,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import authReducer from "./auth";
-import dashboardReducer from "./dashboard";
+
 import profileReducer from "./profile";
 import productReducer from "./product";
 import currentProfileReducer from "./currentUserProfile";
@@ -18,7 +18,6 @@ axios.defaults.headers.common["Authorization"] = jwtToken;
 const rootReducer = combineReducers({
   form: formReducer,
   auth: authReducer,
-  dash: dashboardReducer,
   prof: profileReducer,
   prod: productReducer,
   currProf: currentProfileReducer,

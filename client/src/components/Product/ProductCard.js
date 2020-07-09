@@ -58,8 +58,12 @@ const ProductCard = ({
   );
 };
 
+const mapStateToProps = (state) => {
+  return {};
+};
+
 export default withRouter(
-  connect(null, { addProductForCrowdFund, productDetail, setAlert })(
+  connect(mapStateToProps, { addProductForCrowdFund, productDetail, setAlert })(
     ProductCard
   )
 );
