@@ -29,15 +29,16 @@ router.get(
 
   async (req, res, next) => {
     try {
-      const profile = await Profile.findOne({ user: req.user._id })
-        .populate("user", "-password")
-        .populate("listed")
-        .populate("funded");
+      const profile = await Profile.findOne({ user: req.user._id }).populate(
+        "user",
+        "-password"
+      );
+
       if (profile) {
         return res.status(200).json(profile);
       }
     } catch (error) {
-      res.json(error);
+      res.send("Couldn't find any profile");
     }
   }
 );

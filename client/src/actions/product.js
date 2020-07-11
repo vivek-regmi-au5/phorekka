@@ -24,7 +24,7 @@ export const getProducts = () => {
     } catch (err) {
       dispatch({
         type: PRODUCT_ERRORS,
-        payload: { msg: err, status: err.response.status },
+        payload: err,
       });
     }
   };

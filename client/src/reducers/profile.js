@@ -7,6 +7,9 @@ import {
   ADD_PRODUCT,
   GET_USER_PROFILE,
   SHOW_DISPLAY_PROFILE,
+  USER_PROFILE_ERROR,
+  CLEAR_USER_PROFILE,
+  LIST_CROWD_FUND_ITEMS,
 } from "./../actions/types";
 
 const initialState = {
@@ -15,11 +18,33 @@ const initialState = {
   profiles: null,
   profile: null,
   displayProfile: null,
+  crowdFundItems: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case GET_USER_PROFILE:
+      return {
+        ...state,
+        profile: payload,
+      };
+
+    case CLEAR_USER_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        errors: null,
+        profile: null,
+        crowdFundItems: null,
+      };
+
+    case USER_PROFILE_ERROR:
+      return {
+        ...state,
+        loading: false,
+        errors: payload,
+      };
     case CLEAR_PROFILES:
       return {
         ...state,
@@ -27,6 +52,13 @@ const profileReducer = (state = initialState, action) => {
         errors: null,
         profiles: null,
         displayProfile: null,
+        crowdFundItems: null,
+      };
+
+    case LIST_CROWD_FUND_ITEMS:
+      return {
+        ...state,
+        crowdFundItems: payload,
       };
 
     case ADD_PRODUCT:
@@ -62,11 +94,6 @@ const profileReducer = (state = initialState, action) => {
         errors: payload,
       };
 
-    case GET_USER_PROFILE:
-      return {
-        ...state,
-        profile: payload[0],
-      };
     default:
       return state;
   }

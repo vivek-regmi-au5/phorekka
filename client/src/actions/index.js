@@ -37,7 +37,7 @@ export const signUp = (data) => {
 
       dispatch({
         type: AUTH_SIGN_UP,
-        payload: resp.data.token,
+        payload: resp.data,
       });
       console.log("respie error: ", resp);
       await localStorage.setItem("JWT_TOKEN", resp.data.token);
@@ -89,9 +89,13 @@ export const oauthFacebook = (data) => {
         type: AUTH_SIGN_UP,
         payload: res.data,
       });
+      dispatch({
+        type: GET_USER_PROFILE,
+        payload: res.data.profile,
+      });
 
-      await localStorage.setItem("JWT_TOKEN", res.data);
-      axios.defaults.headers.common["Authorization"] = res.data;
+      await localStorage.setItem("JWT_TOKEN", res.data.token);
+      axios.defaults.headers.common["Authorization"] = res.data.token;
     } catch (error) {
       console.log("error mmesaeg facebook: ", error);
     }
@@ -131,9 +135,13 @@ export const signIn = (data) => {
         type: AUTH_SIGN_IN,
         payload: res.data,
       });
+      dispatch({
+        type: GET_USER_PROFILE,
+        payload: res.data.profile,
+      });
 
-      await localStorage.setItem("JWT_TOKEN", res.data);
-      axios.defaults.headers.common["Authorization"] = res.data;
+      await localStorage.setItem("JWT_TOKEN", res.data.token);
+      axios.defaults.headers.common["Authorization"] = res.data.token;
     } catch (error) {
       dispatch({
         type: AUTH_SIGN_UP_ERROR,

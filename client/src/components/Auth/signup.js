@@ -46,6 +46,16 @@ class Signup extends Component {
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <fieldset>
               <Field
+                name="name"
+                type="text"
+                id="name"
+                component={CustomInput}
+                label="Enter your name"
+                placeholder="John Doe"
+              />
+            </fieldset>
+            <fieldset>
+              <Field
                 name="email"
                 type="text"
                 id="email"
@@ -63,6 +73,7 @@ class Signup extends Component {
                 label="Enter your password"
                 placeholder="password"
               />
+
               <button className="btn btn-primary" type="submit">
                 Signup
               </button>

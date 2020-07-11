@@ -120,8 +120,8 @@ passport.use(
           const newUser = new User({
             facebookId: profile.id,
             email: profile.emails[0].value,
-            firstName: profile.name.givenName,
-            lastName: profile.name.familyName,
+            name: profile.name.givenName + " " + profile.name.familyName,
+            image: profile.photos.value,
           });
           await newUser.save();
           done(null, newUser);

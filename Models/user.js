@@ -16,11 +16,17 @@ const userSchema = Schema({
   facebookId: {
     type: String,
   },
-  firstName: {
+  name: {
     type: String,
   },
-  lastName: {
+  image: {
     type: String,
+    default:
+      "https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg",
+  },
+  isInfluencer: {
+    type: Boolean,
+    default: false,
   },
 });
 

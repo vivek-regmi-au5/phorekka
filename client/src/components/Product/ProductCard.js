@@ -13,6 +13,8 @@ const ProductCard = ({
   addProductForCrowdFund,
   history,
   setAlert,
+  isAuthenticated,
+  profile,
 }) => {
   return (
     <div>
@@ -42,15 +44,30 @@ const ProductCard = ({
             >
               View product
             </button>
-            <button
-              onClick={async () => {
-                addProductForCrowdFund(product._id);
-                setAlert("Product has been added suucessfully", "success");
-              }}
-              className="btn btn-success"
-            >
-              Add Item
-            </button>
+            {isAuthenticated && !profile && (
+              <button
+                onClick={async () => {
+                  setAlert(
+                    "Create a CrowdFunding profile to add items",
+                    "warning"
+                  );
+                }}
+                className="btn btn-success"
+              >
+                Add Item
+              </button>
+            )}
+            {isAuthenticated && profile && (
+              <button
+                onClick={async () => {
+                  addProductForCrowdFund(product._id, profile._id);
+                  setAlert("Product has been added suucessfully", "success");
+                }}
+                className="btn btn-success"
+              >
+                Add Product
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -59,7 +76,10 @@ const ProductCard = ({
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    profile: state.prof.profile,
+  };
 };
 
 export default withRouter(

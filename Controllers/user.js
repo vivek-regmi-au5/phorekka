@@ -17,7 +17,7 @@ signToken = (user) => {
 
 // Email password validation
 const signup = async (req, res, next) => {
-  const { email, password } = req.value.body;
+  const { email, password, name } = req.value.body;
 
   // Check whether same email is already registered locally
   const found = await User.findOne({ email: email });
@@ -32,6 +32,7 @@ const signup = async (req, res, next) => {
   const newUser = new User({
     email: email,
     password: password,
+    name: name,
   });
   await newUser.save();
 
@@ -39,17 +40,15 @@ const signup = async (req, res, next) => {
   const token = signToken(newUser);
 
   // Send the response
-  res.status(200).json({ token });
+  res.status(200).json({ token, user: newUser });
 };
 
 const signin = async (req, res, next) => {
   const token = signToken(req.user);
+  const user = await User.findById(req.user._id);
+  const profile = await Profile.findOne({ user: req.user._id });
 
-  return res.status(200).json(token);
-};
-
-const secret = async (req, res, next) => {
-  res.send("Super secret route");
+  return res.status(200).json({ token, user, profile });
 };
 
 const googleOauth = async (req, res, next) => {
@@ -60,14 +59,17 @@ const googleOauth = async (req, res, next) => {
 
 const facebookOauth = async (req, res, next) => {
   const token = signToken(req.user);
+  const user = await User.findById(req.user._id);
+  const profile = await Profile.findOne({ user: req.user._id });
+  console.log("Profile at facebook login: ", profile);
+  console.log("User at facebook login: ", user);
 
-  return res.status(200).json(token);
+  return res.status(200).json({ token, user, profile });
 };
 
 module.exports = {
   signup,
   signin,
-  secret,
   googleOauth,
   facebookOauth,
 };

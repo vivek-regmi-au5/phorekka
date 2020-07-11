@@ -8,12 +8,12 @@ const CrowdFund = require("./../Models/crowdFund");
 // @desc   Get all crowd funded items for current user
 // @access Private
 router.get(
-  "/",
+  "/:profileId",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
       const crowdFundItems = await CrowdFund.find({
-        profileId: req.body.profileId,
+        profileId: req.params.profileId,
       })
         .populate("profileId")
         .populate("productId");

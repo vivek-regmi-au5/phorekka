@@ -9,6 +9,7 @@ const DEFAULT_STATE = {
   isAuthenticated: false,
   token: "",
   errorMessage: "",
+  user: null,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -17,15 +18,17 @@ export default (state = DEFAULT_STATE, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        token: action.payload,
+        token: action.payload.token,
         errorMessage: "",
+        user: action.payload.user,
       };
     case AUTH_SIGN_IN:
       return {
         ...state,
         isAuthenticated: true,
-        token: action.payload,
+        token: action.payload.token,
         errorMessage: "",
+        user: action.payload.user,
       };
     case AUTH_SIGN_UP_ERROR:
       return {
@@ -38,6 +41,7 @@ export default (state = DEFAULT_STATE, action) => {
         isAuthenticated: false,
         token: "",
         errorMessage: "",
+        user: null,
       };
 
     default:
