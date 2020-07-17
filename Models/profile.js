@@ -7,10 +7,6 @@ const profileSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
   },
-  name: {
-    type: String,
-    required: [true, "Name is required"],
-  },
   gravatar: {
     type: String,
     default: "",
