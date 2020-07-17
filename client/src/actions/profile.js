@@ -6,6 +6,7 @@ import {
   CLEAR_USER_PROFILE,
   GET_USER_PROFILE,
   LIST_CROWD_FUND_ITEMS,
+  LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
 } from "./types";
 import axios from "axios";
 
@@ -65,6 +66,24 @@ export const getCrowdFundedProducts = (profileId) => {
       console.log("crowdFunded items ", res);
       dispatch({
         type: LIST_CROWD_FUND_ITEMS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+// Get all crowdfund items related to the display profile
+export const getCrowdFundItemsForDisplayProfile = (profileId) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:9122/api/v1/crowdFund/${profileId}`
+      );
+      console.log("crowdFunded items ", res);
+      dispatch({
+        type: LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
         payload: res.data,
       });
     } catch (err) {

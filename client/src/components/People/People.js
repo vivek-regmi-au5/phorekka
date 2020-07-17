@@ -11,10 +11,10 @@ const People = ({ getProfiles, profiles }) => {
   }, []);
   return (
     <div>
-      <h1 className="text-primary">People</h1>
-      {!profiles.profiles && <Spinner />}
-      {profiles.profiles &&
-        profiles.profiles.map((profile, index) => (
+      <h1 className="grey-text text-darken-2">People</h1>
+      {!profiles && <Spinner />}
+      {profiles &&
+        profiles.map((profile, index) => (
           <ProfileCard profile={profile} index={index} key={profile._id} />
         ))}
     </div>
@@ -23,7 +23,7 @@ const People = ({ getProfiles, profiles }) => {
 
 const mapStateToProps = (state) => {
   return {
-    profiles: state.prof,
+    profiles: state.prof.profiles,
   };
 };
 

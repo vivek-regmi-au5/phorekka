@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Kindle",
+    "descrption": "Kindle Paperwhite (10th gen) - with Built-in Light, Waterproof, 8 GB, WiFi",
+    "price": { "$numberInt": "12459" },
+    "category": "accessories",
+    "image": "https://www.amazon.in/images/I/41aTw6F6DDL.jpg",
+    "seller": "amazon",
+    "link": "https://www.amazon.in/All-New-Kindle-Paperwhite-10th-Built/dp/B077454Z99/",
+    "inStock": true,
+    "ratingNumber": { "$numberInt": "27" },
+    "ratingAvg": { "$numberDecimal": "4.5" },
+    "reviewNumber": { "$numberInt": "12" },
+    "timestamp": { "$numberInt": "1511593000" }
+  }
+]

@@ -71,20 +71,16 @@ router.put(
   }
 );
 
-// @route  Delete api/profile/address
+// @route  Delete api/crowdFund/id
 // @desc   Delete address
 // @access Private
-router.delete(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res, next) => {
-    try {
-      await CrowdFund.findOneAndDelete({ _id: req.params.id });
-      res.status(200).send("Item Successfully deleted");
-    } catch (error) {
-      res.status(500).send(error);
-    }
+router.delete("/:id", async (req, res, next) => {
+  try {
+    await CrowdFund.findOneAndDelete({ _id: req.params.id });
+    res.status(200).send("Item Successfully deleted");
+  } catch (error) {
+    res.status(500).send(error);
   }
-);
+});
 
 module.exports = router;

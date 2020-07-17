@@ -12,7 +12,6 @@ const transactionSchema = Schema({
   },
   donated: {
     type: String,
-    required: [true, "A donated amount is required"],
   },
   refundStatus: {
     type: Boolean,

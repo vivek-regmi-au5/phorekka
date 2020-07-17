@@ -10,6 +10,7 @@ import {
   USER_PROFILE_ERROR,
   CLEAR_USER_PROFILE,
   LIST_CROWD_FUND_ITEMS,
+  LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
 } from "./../actions/types";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   profiles: null,
   profile: null,
   displayProfile: null,
+  displayProfileCrowdFundItems: null,
   crowdFundItems: null,
 };
 
@@ -92,6 +94,12 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         errors: payload,
+      };
+
+    case LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE:
+      return {
+        ...state,
+        displayProfileCrowdFundItems: payload,
       };
 
     default:

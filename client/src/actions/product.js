@@ -16,6 +16,7 @@ export const getProducts = () => {
     });
     try {
       const res = await axios.get("http://localhost:9122/api/v1/product");
+      console.log("checkres: ", res)
 
       dispatch({
         type: GET_PRODUCTS,
