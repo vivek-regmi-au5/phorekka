@@ -1,11 +1,11 @@
-import React from "react";
+import React,{Fragment} from "react";
 import { connect } from "react-redux";
 import { addProductForCrowdFund } from "./../../actions/listProduct";
 
 const Product = ({ product, addProductForCrowdFund }) => {
   const style = {};
   return (
-    <>
+    <div>
       <div className="row" style={{ marginTop: "60px" }}>
         <div className="col s5">
           <img
@@ -88,7 +88,7 @@ const Product = ({ product, addProductForCrowdFund }) => {
 
         <div className="col s3"></div>
       </div>
-    </>
+    </div>
   );
 };
 

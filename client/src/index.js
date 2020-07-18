@@ -25,7 +25,7 @@ ReactDOM.render(
         <PersistGate persistor={persistor}>
           <App>
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/home" component={authGaurd(Home)} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/people" component={People} />

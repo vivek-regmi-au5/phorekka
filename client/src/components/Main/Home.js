@@ -1,46 +1,75 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-
 import Spinner from "./Spinner";
 import { getCrowdFundedProducts } from "./../../actions/profile";
+import cities from "./cities.json"
+
 
 const Home = ({ profile, getCrowdFundedProducts, crowdFundedProducts }) => {
+  console.log(cities)
+  const url = 'https://indian-cities-api-nocbegfhqg.now.sh/cities'
+  const [data, setData] = useState([])
   useEffect(() => {
     if (profile) {
       getCrowdFundedProducts(profile._id);
     }
+    axios.get(url).then(json => setData(json.data))
   }, []);
+  console.log(data)
+
   return (
     <div>
       {!profile && (
-        <div>
-          <h4>Please fill the form to create your crowdfunding account</h4>
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-              />
-            </div>
+        <div className="container mt-5">
+          <h4 className="text-center text-primary ">
+            Please fill the form to create your crowdfunding account
+          </h4>
+          <div className="row justify-content-center mt-5 container ">
+            <form>
+              <div className="row">
+                <div className="col-lg-6 col-md-6 col-xs-12">
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter email"
+                      size="50"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Location</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                      placeholder="Location"
+                    />
+                  </div>
+                </div>
+              </div>
 
-            <button type="submit" class="btn btn-primary">
-              Submit
-            </button>
-          </form>
+              <button type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       )}
 
@@ -94,7 +123,7 @@ const Home = ({ profile, getCrowdFundedProducts, crowdFundedProducts }) => {
             </div>
           </div>
           <div className="row">
-            {crowdFundedProducts.map((item) => {
+            {crowdFundedProducts.map(item => {
               return (
                 <div className="col-3 card m-3" style={{ width: "10rem" }}>
                   <img
@@ -121,13 +150,13 @@ const Home = ({ profile, getCrowdFundedProducts, crowdFundedProducts }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     profile: state.prof.profile,
-    crowdFundedProducts: state.prof.crowdFundItems,
+    crowdFundedProducts: state.prof.crowdFundItems
   };
 };
 
 export default connect(mapStateToProps, {
-  getCrowdFundedProducts,
+  getCrowdFundedProducts
 })(Home);
