@@ -11,6 +11,7 @@ import {
   CLEAR_USER_PROFILE,
   LIST_CROWD_FUND_ITEMS,
   LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
+  PROFILE_FORM_SUBMIT,
 } from "./../actions/types";
 
 const initialState = {
@@ -102,6 +103,11 @@ const profileReducer = (state = initialState, action) => {
         displayProfileCrowdFundItems: payload,
       };
 
+    case PROFILE_FORM_SUBMIT:
+      return {
+        ...state,
+        profile: payload,
+      };
     default:
       return state;
   }

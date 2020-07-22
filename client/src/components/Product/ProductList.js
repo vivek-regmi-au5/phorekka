@@ -1,13 +1,25 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { getProducts, filterProducts } from "./../../actions/product";
+import {
+  getProducts,
+  filterProducts,
+  nullFilter,
+} from "./../../actions/product";
 import Spinner from "./../Main/Spinner";
 import ProductCard from "./ProductCard";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import { Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
-const ProductList = ({ getProducts, products, filterProducts, alert }) => {
+const ProductList = ({
+  getProducts,
+  products,
+  filterProducts,
+  alert,
+  nullFilter,
+}) => {
   const [genderFilter, setGenderFilter] = useState(null);
   const [categoryFilter, setCatogoryFilter] = useState(null);
 
@@ -38,7 +50,11 @@ const ProductList = ({ getProducts, products, filterProducts, alert }) => {
           <h4>Explore</h4>
         </div>
         <div className="col s3">
-          <h4>All</h4>
+          {products.categoryFilter ? (
+            <h4>{products.categoryFilter.toUpperCase()}</h4>
+          ) : (
+            <h4>ALL</h4>
+          )}
         </div>
         <div className="col s3">
           <Tabs
@@ -68,19 +84,10 @@ const ProductList = ({ getProducts, products, filterProducts, alert }) => {
         <div className="col s3"></div>
       </div>
       <div className="row">
-        {alert.msg && (
-          <div className={`alert alert-${alert.alertType}`}>{alert.msg}</div>
-        )}
-
         {!products.products && <Spinner />}
         <div className="row">
           <div className="col s3">
-            <p
-              style={categoryStyles}
-              onClick={() => {
-                setCatogoryFilter("electronics");
-              }}
-            >
+            <p style={categoryStyles} onClick={nullFilter}>
               <i class="material-icons" style={{ fontSize: "1rem" }}>
                 flash_on
               </i>
@@ -93,7 +100,9 @@ const ProductList = ({ getProducts, products, filterProducts, alert }) => {
                 setCatogoryFilter("clothing");
               }}
             >
-              <i class="fa fa-tshirt"></i>
+              <i class="material-icons" style={{ fontSize: "1rem" }}>
+                flash_on
+              </i>
               Clothing
             </p>{" "}
             <br />
@@ -173,6 +182,9 @@ const ProductList = ({ getProducts, products, filterProducts, alert }) => {
           </div>
         </div>
       </div>
+      <Snackbar open={!!alert.msg} autoHideDuration={5000}>
+        <Alert severity="success">{alert.msg}</Alert>
+      </Snackbar>
     </Fragment>
   );
 };
@@ -187,4 +199,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getProducts,
   filterProducts,
+  nullFilter,
 })(ProductList);

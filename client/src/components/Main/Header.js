@@ -23,15 +23,13 @@ class Header extends Component {
             Phorekka
           </Link>
 
-          {this.props.isAuth && (
-            <ul id="nav-mobile" style={{ marginLeft: "13%" }}>
+          <ul id="nav-mobile" className="right">
+            {this.props.isAuth && (
               <li>
                 <Link to="/home">Home</Link>
               </li>
-            </ul>
-          )}
+            )}
 
-          <ul id="nav-mobile" className="right">
             <li key="people">
               <Link to="/people">People</Link>
             </li>

@@ -114,11 +114,6 @@ class Signin extends Component {
                       >
                         Signin
                       </button>
-                      {this.props.errorMessage ? (
-                        <div className="alert alert-danger">
-                          {this.props.errorMessage}
-                        </div>
-                      ) : null}
                     </div>
                     <div className="row">
                       <div className="col s12">
@@ -128,11 +123,6 @@ class Signin extends Component {
                         >
                           Already registered? <Link to="/signup">Signup </Link>
                         </p>
-                        {this.props.errorMessage ? (
-                          <div className="alert alert-danger">
-                            {this.props.errorMessage}
-                          </div>
-                        ) : null}
                       </div>
                     </div>
                   </div>

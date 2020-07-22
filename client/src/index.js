@@ -17,6 +17,7 @@ import People from "./components/People/People";
 import theme from "./theme";
 import ProductList from "./components/Product/ProductList";
 import Product from "./components/Product/Product";
+import CheckoutPage from "./components/CheckoutPage";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/product" component={ProductList} />
             <Route exact path="/product/item" component={Product} />
+            <Route exact path="/buy" component={CheckoutPage} />
           </App>
         </PersistGate>
       </BrowserRouter>

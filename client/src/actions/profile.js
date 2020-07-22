@@ -7,6 +7,7 @@ import {
   GET_USER_PROFILE,
   LIST_CROWD_FUND_ITEMS,
   LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
+  PROFILE_FORM_SUBMIT,
 } from "./types";
 import axios from "axios";
 
@@ -85,6 +86,25 @@ export const getCrowdFundItemsForDisplayProfile = (profileId) => {
       dispatch({
         type: LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
         payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+// Handle form submit
+export const handleFormSubmit = (data) => {
+  return async (dispatch) => {
+    try {
+      const resp = await axios.post(
+        "http://localhost:9122/api/v1/profile",
+        data
+      );
+      console.log("resppeddewef: ", resp);
+      dispatch({
+        type: PROFILE_FORM_SUBMIT,
+        payload: resp.data.profile,
       });
     } catch (err) {
       console.log(err);

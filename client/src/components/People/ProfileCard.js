@@ -21,13 +21,13 @@ const ProfileCard = (props) => {
         <div style={{ width: "50vh" }} class="card-image">
           <img
             style={{ height: "100%", width: "100%" }}
-            src="https://lorempixel.com/100/190/nature/6"
+            src="https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg"
           />
         </div>
         <div class="card-stacked">
           <div class="card-content">
             <div style={{ height: "85%" }}>
-              <h4>{props.profile.name}</h4>
+              <h4>{props.profile.user.name}</h4>
               <span>{props.profile.age}</span>
               <br />
               <span>{props.profile.location}</span>

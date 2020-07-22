@@ -9,7 +9,10 @@ const profileSchema = Schema({
   },
   gravatar: {
     type: String,
-    default: "",
+    default: "https://dilavr.com.ua/image/catalog/empty-img.png",
+  },
+  name: {
+    type: String,
   },
   bio: {
     type: String,

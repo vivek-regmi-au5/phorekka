@@ -16,7 +16,7 @@ export const getProducts = () => {
     });
     try {
       const res = await axios.get("http://localhost:9122/api/v1/product");
-      console.log("checkres: ", res)
+      console.log("checkres: ", res);
 
       dispatch({
         type: GET_PRODUCTS,
@@ -38,6 +38,21 @@ export const filterProducts = (genderFilter, categoryFilter) => {
       dispatch({
         type: FILTER_PRODUCTS,
         payload: { genderFilter: genderFilter, categoryFilter: categoryFilter },
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERRORS,
+        payload: err,
+      });
+    }
+  };
+};
+
+export const nullFilter = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "NULL",
       });
     } catch (err) {
       dispatch({

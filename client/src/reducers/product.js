@@ -56,6 +56,13 @@ const productReducer = (state = initialState, action) => {
         errors: payload,
       };
 
+    case "NULL":
+      return {
+        ...state,
+        genderFilter: null,
+        categoryFilter: null,
+      };
+
     case FILTER_PRODUCTS:
       if (!payload.categoryFilter) {
         return {
