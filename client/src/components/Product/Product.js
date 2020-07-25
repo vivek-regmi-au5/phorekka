@@ -9,8 +9,8 @@ const Product = ({ product, addProductForCrowdFund }) => {
       <div className="row" style={{ marginTop: "60px" }}>
         <div className="col s5">
           <img
-            style={{ height: "500px", width: "100%" }}
-            src="https://www.amazon.in/images/I/71vmTAEmPQL._UL1500_.jpg"
+            style={{ height: "500px", width: "80%" }}
+            src={product[0].images[0]}
             alt="..."
           />
         </div>

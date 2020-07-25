@@ -35,14 +35,14 @@ class Signup extends Component {
     console.log("form data: ", formData);
     await this.props.signUp(formData);
     if (!this.props.errorMessage) {
-      this.props.history.push("/home");
+      this.props.history.push("/people");
     }
   }
   async responseGoogle(res) {
     console.log("responseGoogle: ", res);
     await this.props.oauthGoogle(res);
     if (!this.props.errorMessage) {
-      this.props.history.push("/home");
+      this.props.history.push("/people");
     }
   }
 
@@ -50,7 +50,7 @@ class Signup extends Component {
     console.log("responseFacebook: ", res);
     await this.props.oauthFacebook(res);
     if (!this.props.errorMessage) {
-      this.props.history.push("/home");
+      this.props.history.push("/people");
     }
   }
   render() {

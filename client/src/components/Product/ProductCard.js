@@ -22,7 +22,7 @@ const ProductCard = ({
       <div className="card-image waves-effect waves-block waves-light">
         <img
           style={{ height: "300px", width: "100%" }}
-          src="https://dilavr.com.ua/image/catalog/empty-img.png"
+          src={product.images[0]}
           className="activator"
           alt="..."
         />

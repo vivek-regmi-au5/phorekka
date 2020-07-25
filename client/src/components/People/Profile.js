@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getCrowdFundItemsForDisplayProfile } from "./../../actions/profile";
 import { Redirect, withRouter, Link } from "react-router-dom";
+import Checkout from "./../CheckOut";
 
 const Profile = ({
   profile,
@@ -75,7 +76,7 @@ const Profile = ({
                   <div className="card" style={{ width: "26rem" }}>
                     <img
                       style={{ width: "100%", height: "300px" }}
-                      src="https://dilavr.com.ua/image/catalog/empty-img.png"
+                      src={item.productId.images[0]}
                       alt="Card cap"
                     />
                     <div className="card-content">
@@ -88,17 +89,7 @@ const Profile = ({
                       <button className="btn btn-warning">
                         {item.productId.originalPrice}
                       </button>
-                      <Link
-                        className="btn"
-                        to={{
-                          pathname: "/buy",
-                          name: item.productId.name,
-                          price: item.productId.originalPrice,
-                          productBy: item.productId.brand,
-                        }}
-                      >
-                        Buy
-                      </Link>
+                      <Checkout item={item} />
                     </div>
                   </div>
                 </div>

@@ -8,6 +8,7 @@ import {
   LIST_CROWD_FUND_ITEMS,
   LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
   PROFILE_FORM_SUBMIT,
+  DELETE_CROWDFUNDED_ITEM,
 } from "./types";
 import axios from "axios";
 
@@ -82,7 +83,7 @@ export const getCrowdFundItemsForDisplayProfile = (profileId) => {
       const res = await axios.get(
         `http://localhost:9122/api/v1/crowdFund/${profileId}`
       );
-      console.log("crowdFunded items ", res);
+      console.log("crowdFunded items wqefergrthrtgwefer", res);
       dispatch({
         type: LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
         payload: res.data,
@@ -101,10 +102,28 @@ export const handleFormSubmit = (data) => {
         "http://localhost:9122/api/v1/profile",
         data
       );
+
       console.log("resppeddewef: ", resp);
       dispatch({
         type: PROFILE_FORM_SUBMIT,
         payload: resp.data.profile,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+// delete the funded item from crowd fund items list
+export const deleteCrowdFundedItem = (productId, profileId) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:9122/api/v1/crowdFund/${profileId}/${productId}`
+      );
+      console.log("is item deleted: ", res);
+      dispatch({
+        type: DELETE_CROWDFUNDED_ITEM,
       });
     } catch (err) {
       console.log(err);

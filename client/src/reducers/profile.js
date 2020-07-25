@@ -108,6 +108,7 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         profile: payload,
       };
+
     default:
       return state;
   }

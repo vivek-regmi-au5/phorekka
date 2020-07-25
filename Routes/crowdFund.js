@@ -9,7 +9,7 @@ const CrowdFund = require("./../Models/crowdFund");
 // @access Private
 router.get(
   "/:profileId",
-  passport.authenticate("jwt", { session: false }),
+
   async (req, res, next) => {
     try {
       const crowdFundItems = await CrowdFund.find({
@@ -74,9 +74,12 @@ router.put(
 // @route  Delete api/crowdFund/id
 // @desc   Delete address
 // @access Private
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:profileId/:productId", async (req, res, next) => {
   try {
-    await CrowdFund.findOneAndDelete({ _id: req.params.id });
+    await CrowdFund.findOneAndDelete({
+      "profileId._id": req.params.profileId,
+      "productId._id": req.params.productId,
+    });
     res.status(200).send("Item Successfully deleted");
   } catch (error) {
     res.status(500).send(error);

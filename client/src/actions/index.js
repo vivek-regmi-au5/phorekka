@@ -81,8 +81,11 @@ export const oauthFacebook = (data) => {
       console.log("we received facebook: ", data);
       const res = await axios.post(
         "http://localhost:9122/api/v1/user/facebook/oauth",
-        { access_token: data.accessToken }
+        {
+          access_token: data.accessToken,
+        }
       );
+
       console.log("ress at facebook check: ", res);
 
       dispatch({
@@ -91,7 +94,7 @@ export const oauthFacebook = (data) => {
       });
       dispatch({
         type: GET_USER_PROFILE,
-        payload: res.data.profile,
+        payload: { ...res.data.profile, name: res.data.user.name },
       });
 
       await localStorage.setItem("JWT_TOKEN", res.data.token);
@@ -137,7 +140,7 @@ export const signIn = (data) => {
       });
       dispatch({
         type: GET_USER_PROFILE,
-        payload: res.data.profile,
+        payload: { ...res.data.profile, name: res.data.user.name },
       });
 
       await localStorage.setItem("JWT_TOKEN", res.data.token);

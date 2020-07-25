@@ -3,12 +3,14 @@ import StripeCheckout from "react-stripe-checkout";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { setAlert } from "../actions/alert";
+import { deleteCrowdFundedItem } from "./../actions/profile";
 
 const CheckOut = (props) => {
+  console.log("props at checkout", props);
   const [product, setProduct] = useState({
-    name: "Round Tshirt",
-    price: 29,
-    productBy: "Jockey",
+    name: props.item.productId.title,
+    price: parseInt(props.item.productId.sellingPrice),
+    productBy: props.item.productId.brand,
   });
   const makePayment = (token) => {
     const body = {
@@ -18,6 +20,7 @@ const CheckOut = (props) => {
     const headers = {
       "Content-Type": "application/json",
     };
+    console.log(props);
 
     return fetch("http://localhost:9122/payment", {
       method: "POST",
@@ -28,12 +31,14 @@ const CheckOut = (props) => {
         console.log("Response: ", response);
         const { status } = response;
 
-        if (status === 200) {
-          props.dispatch({
-            type: "SUCCESS_PAYMENT",
-          });
+        if (response.status === 200) {
           props.history.push("/profile");
           props.setAlert("Payment Successful", "success");
+          props.deleteCrowdFundedItem(
+            props.item.productId._id,
+            props.item.profileId._id
+          );
+          props.forceUpdate();
         }
       })
       .catch((err) => {
@@ -42,11 +47,13 @@ const CheckOut = (props) => {
   };
   return (
     <StripeCheckout
-      stripeKey="pk_test_jVRMGELoDklS8VslpjW8El6h00J2QSoyyI"
+      stripeKey="pk_test_51GDl42GbPn0OKeQiL3ARz4wElDyEAmisO00VkxJS8dneun7WBEDpKIhQMDOJ2YlYe3k9zjIPFHZ2KJWowgERumJQ00tJKt52nl"
       token={makePayment}
       name="Buy"
     />
   );
 };
 
-export default withRouter(connect(null, { setAlert })(CheckOut));
+export default withRouter(
+  connect(null, { setAlert, deleteCrowdFundedItem })(CheckOut)
+);

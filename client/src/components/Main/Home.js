@@ -7,6 +7,7 @@ import {
 import { setAlert } from "./../../actions/alert";
 import M from "materialize-css";
 import axios from "axios";
+import { array } from "joi";
 
 const Home = ({
   profile,
@@ -14,6 +15,7 @@ const Home = ({
   crowdFundedProducts,
   handleFormSubmit,
   setAlert,
+  user,
 }) => {
   const [bio, setbio] = useState(null);
   const [location, setlocation] = useState(null);
@@ -240,71 +242,70 @@ const Home = ({
       )}
 
       {profile && !crowdFundedProducts && (
-        <div>
-          <h1 style={{ marginLeft: "8%" }}>My Profile</h1>
-          <div className="card" style={{ width: "100%" }}>
-            <div
-              style={{ height: "50vh" }}
-              className="card horizontal offset-s1"
-            >
-              <div style={{ width: "50vh" }} class="card-image">
-                <img
-                  style={{ height: "100%", width: "100%" }}
-                  src="https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg"
-                />
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <div style={{ height: "85%" }}>
-                    <h4>{profile.name}</h4>
-                    <span>{profile.age}</span>
-                    <br />
-                    <span>{profile.location}</span>
-                    <br />
-                    <span>{profile.bio}</span>
-                    <br />
-                    <span>{profile.message}</span>
-                    <br />
-                  </div>
-                  <div className="right-align">
-                    <i
-                      style={iconStyles}
-                      class="fa fa-facebook-official"
-                      aria-hidden="true"
-                    ></i>
-                    <i
-                      style={iconStyles}
-                      class="fa fa-twitter-square"
-                      aria-hidden="true"
-                    ></i>
-                    <i
-                      style={iconStyles}
-                      class="fa fa-instagram"
-                      aria-hidden="true"
-                    ></i>
-                    <i
-                      style={iconStyles}
-                      class="fa fa-youtube-play"
-                      aria-hidden="true"
-                    ></i>
+        <div className="row">
+          <div className="col s10 offset-s1">
+            <h1 style={{ marginLeft: "8%" }}>My Profile</h1>
+            <div className="card">
+              <div
+                style={{ height: "50vh" }}
+                className="card horizontal offset-s1"
+              >
+                <div style={{ width: "50%" }} class="card-image">
+                  <img
+                    style={{ height: "100%", width: "100%" }}
+                    src="https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg"
+                  />
+                </div>
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <div style={{ height: "85%" }}>
+                      <h4>{profile.user.name || user}</h4>
+                      <span>{profile.age}</span>
+                      <br />
+                      <span>{profile.location}</span>
+                      <br />
+                      <span>{profile.bio}</span>
+                      <br />
+                      <span>{profile.message}</span>
+                      <br />
+                    </div>
+                    <div className="right-align">
+                      <i
+                        style={iconStyles}
+                        class="fa fa-facebook-official"
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        style={iconStyles}
+                        class="fa fa-twitter-square"
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        style={iconStyles}
+                        class="fa fa-instagram"
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        style={iconStyles}
+                        class="fa fa-youtube-play"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div style={{ marginTop: "90%" }}>
-            Click here to view product listings
-          </div>
         </div>
       )}
-      {profile && crowdFundedProducts && (
+      {Array.isArray(crowdFundedProducts) && profile && (
         <div>
           <h1 style={{ marginLeft: "8%" }}>My Profile</h1>
           <div
             style={{ height: "50vh" }}
             className="card horizontal col s10 offset-s1"
           >
-            <div style={{ width: "50vh" }} class="card-image">
+            <div style={{ width: "40%" }} class="card-image">
               <img
                 style={{ height: "100%", width: "100%" }}
                 src="https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg"
@@ -313,7 +314,7 @@ const Home = ({
             <div class="card-stacked">
               <div class="card-content">
                 <div style={{ height: "85%" }}>
-                  <h4>{profile.name}</h4>
+                  <h4>{user}</h4>
                   <span>{profile.age}</span>
                   <br />
                   <span>{profile.location}</span>
@@ -350,31 +351,30 @@ const Home = ({
           </div>
           <div className="col s10 offset-s1" style={{ border: "none" }}>
             <div className="row">
-              {typeof crowdFundedProducts === "string" &&
-                crowdFundedProducts.map((item) => {
-                  return (
-                    <div className="col s4">
-                      <div className="card" style={{ width: "26rem" }}>
-                        <img
-                          style={{ width: "100%", height: "300px" }}
-                          src="https://dilavr.com.ua/image/catalog/empty-img.png"
-                          alt="Card cap"
-                        />
-                        <div className="card-content">
-                          <h5 className="card-title">{item.productId.title}</h5>
-                          <p className="card-text">
-                            {item.productId.descriptionMain}
-                          </p>
-                        </div>
-                        <div className="card-action">
-                          <button className="btn btn-warning">
-                            {item.productId.originalPrice}
-                          </button>
-                        </div>
+              {crowdFundedProducts.map((item) => {
+                return (
+                  <div className="col s4">
+                    <div className="card" style={{ width: "26rem" }}>
+                      <img
+                        style={{ width: "100%", height: "300px" }}
+                        src={item.productId.images[0]}
+                        alt="Card cap"
+                      />
+                      <div className="card-content">
+                        <h5 className="card-title">{item.productId.title}</h5>
+                        <p className="card-text">
+                          {item.productId.descriptionMain}
+                        </p>
+                      </div>
+                      <div className="card-action">
+                        <button className="btn btn-warning">
+                          {item.productId.originalPrice}
+                        </button>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -387,6 +387,7 @@ const mapStateToProps = (state) => {
   return {
     profile: state.prof.profile,
     crowdFundedProducts: state.prof.crowdFundItems,
+    user: state.auth.user.name,
   };
 };
 

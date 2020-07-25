@@ -11,7 +11,9 @@ const People = ({ getProfiles, profiles }) => {
   }, []);
   return (
     <div>
-      <h1 className="grey-text text-darken-2">People</h1>
+      <h1 className="grey-text text-darken-2" style={{ marginLeft: "8%" }}>
+        People
+      </h1>
       {!profiles && <Spinner />}
       {profiles &&
         profiles.map((profile, index) => (
