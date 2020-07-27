@@ -47,7 +47,7 @@
     "stripe": "^8.69.0",
     "uuid": "^8.2.0"
   },
-  "proxy": "https://dry-beyond-79674.herokuapp.com/",
+  "proxy": "https://mysterious-shore-27645.herokuapp.com/",
   "devDependencies": {
     "morgan": "^1.10.0"
   }
