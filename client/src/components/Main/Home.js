@@ -250,7 +250,7 @@ const Home = ({
                 style={{ height: "50vh" }}
                 className="card horizontal offset-s1"
               >
-                <div style={{ width: "50%" }} class="card-image">
+                <div style={{ width: "40%" }} class="card-image">
                   <img
                     style={{ height: "100%", width: "100%" }}
                     src="https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg"
