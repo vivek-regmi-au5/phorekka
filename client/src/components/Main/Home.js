@@ -36,7 +36,6 @@ const Home = ({
     if (profile) {
       getCrowdFundedProducts(profile._id);
     }
-    axios.get(url).then((json) => setData(json.data));
   }, []);
 
   useEffect(() => {
