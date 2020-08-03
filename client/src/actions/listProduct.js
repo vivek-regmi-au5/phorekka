@@ -4,7 +4,7 @@ import axios from "axios";
 // Add product to list
 export const addProductForCrowdFund = (productId, profileId) => {
   return async (dispatch) => {
-    const res = await axios.post("http://localhost:9122/api/v1/crowdFund", {
+    const res = await axios.post("/api/v1/crowdFund", {
       profileId,
       productId,
     });

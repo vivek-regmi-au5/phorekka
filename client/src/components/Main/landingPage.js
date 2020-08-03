@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BackGround from "./../../images/bg4.jpg";
+import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -34,7 +35,15 @@ class LandingPage extends Component {
               >
                 A platform for budding influencers to grow their influence
               </p>
-              <button className="btn-large waves-effect">Get Started</button>
+              {!this.props.isAuthenticated ? (
+                <Link to="/signup" className="btn-large waves-effect">
+                  Get Started
+                </Link>
+              ) : (
+                <Link to="/home" className="btn-large waves-effect">
+                  My Profile
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -43,4 +52,8 @@ class LandingPage extends Component {
   }
 }
 
-export default connect()(LandingPage);
+const mapStateToProps = (state) => {
+  return { isAuthenticated: state.auth.isAuthenticated };
+};
+
+export default connect(mapStateToProps)(LandingPage);

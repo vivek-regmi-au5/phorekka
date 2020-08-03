@@ -19,7 +19,7 @@ export const getProfiles = () => {
       type: CLEAR_PROFILES,
     });
     try {
-      const res = await axios.get("http://localhost:9122/api/v1/profile");
+      const res = await axios.get("/api/v1/profile");
       console.log("/actions/profile 11 ", res);
       dispatch({
         type: GET_PROFILES,
@@ -41,9 +41,7 @@ export const getUserProfile = () => {
       type: CLEAR_USER_PROFILE,
     });
     try {
-      const res = await axios.get(
-        "http://localhost:9122/api/v1/profile/current"
-      );
+      const res = await axios.get("/api/v1/profile/current");
       console.log("current user profile data ", res);
       dispatch({
         type: GET_USER_PROFILE,
@@ -62,9 +60,7 @@ export const getUserProfile = () => {
 export const getCrowdFundedProducts = (profileId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(
-        `http://localhost:9122/api/v1/crowdFund/${profileId}`
-      );
+      const res = await axios.get(`/api/v1/crowdFund/${profileId}`);
       console.log("crowdFunded items ", res);
       dispatch({
         type: LIST_CROWD_FUND_ITEMS,
@@ -80,9 +76,7 @@ export const getCrowdFundedProducts = (profileId) => {
 export const getCrowdFundItemsForDisplayProfile = (profileId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(
-        `http://localhost:9122/api/v1/crowdFund/${profileId}`
-      );
+      const res = await axios.get(`/api/v1/crowdFund/${profileId}`);
       console.log("crowdFunded items wqefergrthrtgwefer", res);
       dispatch({
         type: LIST_CROWD_FUND_ITEMS_FOR_DISPLAY_PROFILE,
@@ -98,10 +92,7 @@ export const getCrowdFundItemsForDisplayProfile = (profileId) => {
 export const handleFormSubmit = (data) => {
   return async (dispatch) => {
     try {
-      const resp = await axios.post(
-        "http://localhost:9122/api/v1/profile",
-        data
-      );
+      const resp = await axios.post("/api/v1/profile", data);
 
       console.log("resppeddewef: ", resp);
       dispatch({
@@ -119,7 +110,7 @@ export const deleteCrowdFundedItem = (productId, profileId) => {
   return async (dispatch) => {
     try {
       const res = await axios.delete(
-        `http://localhost:9122/api/v1/crowdFund/${profileId}/${productId}`
+        `/api/v1/crowdFund/${profileId}/${productId}`
       );
       console.log("is item deleted: ", res);
       dispatch({
