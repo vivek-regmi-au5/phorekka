@@ -40,8 +40,6 @@
     "passport-local": "^1.0.0",
     "passport-token-google": "^0.1.4",
     "passport-token-google2": "^0.1.4",
-    "radium": "^0.26.0",
-    "react-autosuggest": "^10.0.2",
     "stripe": "^8.69.0",
     "uuid": "^8.2.0"
   },
