@@ -45,7 +45,6 @@
     "passport-token-google2": "^0.1.4",
     "radium": "^0.26.0",
     "react-autosuggest": "^10.0.2",
-    "redux-persist": "^6.0.0",
     "stripe": "^8.69.0",
     "uuid": "^8.2.0"
   },
